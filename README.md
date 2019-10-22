@@ -1,0 +1,2 @@
+# Eventscape
+Event Manager Application

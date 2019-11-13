@@ -1,4 +1,4 @@
-package com.example.emi.eventscape;
+package com.project.emi.eventscape;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.example.emi.eventscape;
+package com.project.emi.eventscape;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.example.emi.eventscape", appContext.getPackageName());
+        assertEquals("com.project.emi.eventscape", appContext.getPackageName());
     }
 }

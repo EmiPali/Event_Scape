@@ -2,7 +2,6 @@ package com.project.emi.eventscape.util;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -15,7 +14,7 @@ import com.project.emi.eventscape.likes.LikesActivity;
 import com.project.emi.eventscape.profile.ProfileActivity;
 import com.project.emi.eventscape.search.SearchActivity;
 
-import share.ShareActivity;
+import com.project.emi.eventscape.share.ShareActivity;
 
 public class BottomNavigationViewHelper {
     private static final String TAG = "BottomNavigationViewHel";

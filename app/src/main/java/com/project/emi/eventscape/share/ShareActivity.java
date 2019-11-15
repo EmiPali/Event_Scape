@@ -1,4 +1,4 @@
-package share;
+package com.project.emi.eventscape.share;
 
 import android.content.Context;
 import android.os.Bundle;

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1094119716877",
+    "firebase_url": "https://eventscape-6ad46.firebaseio.com",
+    "project_id": "eventscape-6ad46",
+    "storage_bucket": "eventscape-6ad46.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094119716877:android:14b43391d635789e48fd44",
+        "android_client_info": {
+          "package_name": "com.project.emi.eventscape"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1094119716877-a8jm6br2ino8qiof936rt3kg64g6usqg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.emi.eventscape",
+            "certificate_hash": "c9f1d303ed8a68e22f0a00e6ce4d4b3a4d18409b"
+          }
+        },
+        {
+          "client_id": "1094119716877-2ajbfjsedvg5ge2r6hj0hejn1ithhr8a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD55oYkbVv_zLY_wXzNed45fypg728RU64"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1094119716877-2ajbfjsedvg5ge2r6hj0hejn1ithhr8a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

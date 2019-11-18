@@ -19,7 +19,9 @@
         <activity android:name=".profile.ProfileActivity"/>
         <activity android:name=".search.SearchActivity"/>
         <activity android:name="com.project.emi.eventscape.share.ShareActivity"/>
-        <activity android:name=".profile.AccountSettingsActivity"></activity>
+        <activity android:name=".profile.AccountSettingsActivity"/>
+        <activity android:name=".login.LoginActivity"/>
+        <activity android:name=".login.RegisterActivity"/>
         <activity android:name="com.project.emi.eventscape.home.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "321780083770",
-    "firebase_url": "https://event-scape.firebaseio.com",
-    "project_id": "event-scape",
-    "storage_bucket": "event-scape.appspot.com"
+    "project_number": "1094119716877",
+    "firebase_url": "https://eventscape-6ad46.firebaseio.com",
+    "project_id": "eventscape-6ad46",
+    "storage_bucket": "eventscape-6ad46.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:321780083770:android:37dd83a2a0ce7709729903",
+        "mobilesdk_app_id": "1:1094119716877:android:14b43391d635789e48fd44",
         "android_client_info": {
           "package_name": "com.project.emi.eventscape"
         }
       },
       "oauth_client": [
         {
-          "client_id": "321780083770-aa2av5smjnb26svi5rf7pjikte1psr31.apps.googleusercontent.com",
+          "client_id": "1094119716877-a8jm6br2ino8qiof936rt3kg64g6usqg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.project.emi.eventscape",
@@ -23,20 +23,20 @@
           }
         },
         {
-          "client_id": "321780083770-34gg65av4bprcsrgp9ptmr8c1lgvje71.apps.googleusercontent.com",
+          "client_id": "1094119716877-2ajbfjsedvg5ge2r6hj0hejn1ithhr8a.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDZ8yuzCW9QI5lu1nH153RT6pFsXKfwfqU"
+          "current_key": "AIzaSyD55oYkbVv_zLY_wXzNed45fypg728RU64"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "321780083770-34gg65av4bprcsrgp9ptmr8c1lgvje71.apps.googleusercontent.com",
+              "client_id": "1094119716877-2ajbfjsedvg5ge2r6hj0hejn1ithhr8a.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

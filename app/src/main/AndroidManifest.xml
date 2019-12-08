@@ -6,6 +6,9 @@
     <dist:module dist:instant="true" />
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -21,6 +24,7 @@
         <activity android:name="com.project.emi.eventscape.share.ShareActivity"/>
         <activity android:name=".profile.AccountSettingsActivity"/>
         <activity android:name=".login.LoginActivity"/>
+        <activity android:name=".share.NextActivity"/>
         <activity android:name=".login.RegisterActivity"/>
         <activity android:name="com.project.emi.eventscape.home.HomeActivity">
             <intent-filter>

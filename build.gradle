@@ -1,48 +1,23 @@
-apply plugin: 'com.android.application'
+buildscript {
+    repositories {
+        google()
+        jcenter()
 
-android {
-    compileSdkVersion 28
-    defaultConfig {
-        applicationId "com.project.emi.eventscape"
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath 'com.google.gms:google-services:4.3.2'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
     }
 }
 
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    testImplementation 'junit:junit:4.12'
-
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-
-    // firebase
-    implementation 'com.google.firebase:firebase-core:17.2.1'
-    implementation 'com.google.firebase:firebase-database:19.2.0'
-    implementation 'com.google.firebase:firebase-analytics:17.2.1'
-    implementation 'com.github.ittianyu:BottomNavigationViewEx:1.1.9'
-    implementation 'com.google.firebase:firebase-auth:19.1.0'
-
-
-    //circle image view
-    implementation 'de.hdodenhof:circleimageview:3.0.1'
-    //universal image loader
-    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
-
-
-
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
 }
 
-apply plugin: 'com.google.gms.google-services'

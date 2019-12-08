@@ -30,7 +30,7 @@ public class UserAccountSettings {
         return description;
     }
 
-    public void setDscription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -104,4 +104,6 @@ public class UserAccountSettings {
                 ", website='" + website + '\'' +
                 '}';
     }
+
+
 }

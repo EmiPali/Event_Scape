@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.project.emi.eventscape.R;
@@ -41,16 +42,28 @@ public class ProfileActivity extends AppCompatActivity{
         setContentView(R.layout.activity_profile);
         Log.d(TAG, "onCreate: started.");
 
+        init();
 
-        setupBottomNavigationView();
+
+       /* setupBottomNavigationView();
         setupToolbar();
         setupActivityWidgets();
         setProfileImage();
 
-        tempGridSetup();
-
+        tempGridSetup();*/
     }
 
+    private void init()
+    {
+        Log.d(TAG, "init: inflating" + getString(R.string.profile_fragment));
+        ProfileFragment fragment = new ProfileFragment();
+        FragmentTransaction transaction = ProfileActivity.this.getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container,fragment);
+        transaction.addToBackStack(getString(R.string.profile_fragment));
+        transaction.commit();
+    }
+
+    /*
     private void tempGridSetup(){
         ArrayList<String> imgURLs = new ArrayList<>();
         imgURLs.add("https://i.redd.it/9bf67ygj710z.jpg");
@@ -92,9 +105,9 @@ public class ProfileActivity extends AppCompatActivity{
 
     }
 
-    /**
-     * Responsible for setting up the profile toolbar
-     */
+
+     //Responsible for setting up the profile toolbar
+
     private void setupToolbar(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.profileToolBar);
         setSupportActionBar(toolbar);
@@ -110,9 +123,8 @@ public class ProfileActivity extends AppCompatActivity{
         });
     }
 
-    /**
-     * BottomNavigationView setup
-     */
+    //BottomNavigationView setup
+
     private void setupBottomNavigationView(){
         Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
         BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavViewBar);
@@ -122,5 +134,6 @@ public class ProfileActivity extends AppCompatActivity{
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
     }
+     */
 
 }

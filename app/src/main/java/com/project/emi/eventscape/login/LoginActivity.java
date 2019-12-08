@@ -67,7 +67,9 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    //Firebase
+     /*
+    ------------------------------------ Firebase ---------------------------------------------
+     */
 
     private void init(){
 
@@ -189,7 +191,3 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 }
-
-
-
-

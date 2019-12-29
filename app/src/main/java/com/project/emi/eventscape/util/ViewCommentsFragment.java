@@ -208,6 +208,4 @@ public class ViewCommentsFragment extends Fragment {
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
-
-    
 }

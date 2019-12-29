@@ -1,35 +1,41 @@
 package com.project.emi.eventscape.profile;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.project.emi.eventscape.R;
-import com.project.emi.eventscape.ViewPostFragment;
+import com.project.emi.eventscape.util.ViewCommentsFragment;
+import com.project.emi.eventscape.util.ViewPostFragment;
 import com.project.emi.eventscape.models.Photo;
-import com.project.emi.eventscape.util.BottomNavigationViewHelper;
-import com.project.emi.eventscape.util.GridImageAdapter;
-import com.project.emi.eventscape.util.UniversalImageLoader;
 
-import java.util.ArrayList;
-
-public class ProfileActivity extends AppCompatActivity implements ProfileFragment.OnGridImageSelectedListener{
+public class ProfileActivity extends AppCompatActivity implements
+        ProfileFragment.OnGridImageSelectedListener ,
+        ViewPostFragment.OnCommentThreadSelectedListener{
 
     private static final String TAG = "ProfileActivity";
+
+    @Override
+    public void onCommentThreadSelectedListener(Photo photo) {
+        Log.d(TAG, "onCommentThreadSelectedListener:  selected a comment thread");
+
+        ViewCommentsFragment fragment = new ViewCommentsFragment();
+        Bundle args = new Bundle();
+        args.putParcelable(getString(R.string.photo), photo);
+        fragment.setArguments(args);
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(getString(R.string.view_comments_fragment));
+        transaction.commit();
+    }
 
     @Override
     public void onGridImageSelected(Photo photo, int activityNumber) {
@@ -39,6 +45,7 @@ public class ProfileActivity extends AppCompatActivity implements ProfileFragmen
         Bundle args = new Bundle();
         args.putParcelable(getString(R.string.photo), photo);
         args.putInt(getString(R.string.activity_number), activityNumber);
+
         fragment.setArguments(args);
 
         FragmentTransaction transaction  = getSupportFragmentManager().beginTransaction();
@@ -78,7 +85,6 @@ public class ProfileActivity extends AppCompatActivity implements ProfileFragmen
         transaction.addToBackStack(getString(R.string.profile_fragment));
         transaction.commit();
     }
-
 
 
 

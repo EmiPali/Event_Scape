@@ -20,6 +20,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.project.emi.eventscape.R;
+import com.project.emi.eventscape.profile.AccountSettingsActivity;
 import com.project.emi.eventscape.util.FilePaths;
 import com.project.emi.eventscape.util.FileSearch;
 import com.project.emi.eventscape.util.GridImageAdapter;
@@ -77,15 +78,33 @@ public class GalleryFragment extends Fragment {
             public void onClick(View v) {
                 Log.d(TAG, "onClick: navigating to the final share screen.");
 
-                Intent intent = new Intent(getActivity(), NextActivity.class);
-                intent.putExtra(getString(R.string.selected_image), mSelectedImage);
-                startActivity(intent);
+                if(isRootTask()){
+                    Intent intent = new Intent(getActivity(), NextActivity.class);
+                    intent.putExtra(getString(R.string.selected_image), mSelectedImage);
+                    startActivity(intent);
+                }else{
+                    Intent intent = new Intent(getActivity(), AccountSettingsActivity.class);
+                    intent.putExtra(getString(R.string.selected_image), mSelectedImage);
+                    intent.putExtra(getString(R.string.return_to_fragment), getString(R.string.edit_profile_fragment));
+                    startActivity(intent);
+                    getActivity().finish();
+                }
+
             }
         });
 
         init();
 
         return view;
+    }
+
+    private boolean isRootTask(){
+        if(((ShareActivity)getActivity()).getTask() == 0){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     private void init(){
@@ -141,8 +160,13 @@ public class GalleryFragment extends Fragment {
         gridView.setAdapter(adapter);
 
         //set the first image to be displayed when the activity fragment view is inflated
-        setImage(imgURLs.get(0), galleryImage, mAppend);
-        mSelectedImage = imgURLs.get(0);
+        try {
+            setImage(imgURLs.get(0), galleryImage, mAppend);
+            mSelectedImage = imgURLs.get(0);
+
+        }catch (ArrayIndexOutOfBoundsException e){
+            Log.e(TAG,"setupGridView: ArrayIndexOuOfBoundsExpection: " +e.getMessage());
+        }
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

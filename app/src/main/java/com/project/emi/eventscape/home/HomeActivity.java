@@ -22,6 +22,8 @@ import com.project.emi.eventscape.util.BottomNavigationViewHelper;
 import com.project.emi.eventscape.util.SectionsPagerAdapter;
 import com.project.emi.eventscape.util.UniversalImageLoader;
 
+import static com.project.emi.eventscape.util.BottomNavigationViewHelper.*;
+
 
 public class HomeActivity extends AppCompatActivity {
     private static final String TAG = "HomeActivity";
@@ -74,7 +76,7 @@ public class HomeActivity extends AppCompatActivity {
        // if(bottomNavigationViewEx!=null){
          //   bd.setupBottomNavigationView(bottomNavigationViewEx);
         //}
-        BottomNavigationViewHelper.enableNavigation(mContext,bottomNavigationViewEx);
+        enableNavigation(mContext,this, bottomNavigationViewEx);
         Menu menu = bottomNavigationViewEx.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);

@@ -1,5 +1,6 @@
 package com.project.emi.eventscape.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,6 +30,7 @@ import com.project.emi.eventscape.dialogs.ConfirmPasswordDialog;
 import com.project.emi.eventscape.models.User;
 import com.project.emi.eventscape.models.UserAccountSettings;
 import com.project.emi.eventscape.models.UserSettings;
+import com.project.emi.eventscape.share.ShareActivity;
 import com.project.emi.eventscape.util.FirebaseMethods;
 import com.project.emi.eventscape.util.UniversalImageLoader;
 
@@ -65,7 +67,6 @@ public class EditProfileFragment extends Fragment implements
                             mAuth.fetchSignInMethodsForEmail(mEmail.getText().toString()).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
-
                                     if(task.isSuccessful()){
                                         try{
                                             if(task.getResult().getSignInMethods().size() == 1){
@@ -279,7 +280,16 @@ public class EditProfileFragment extends Fragment implements
         mEmail.setText(userSettings.getUser().getEmail());
         mPhoneNumber.setText(String.valueOf(userSettings.getUser().getPhone_number()));
 
-
+        mChangeProfilePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: changing profile photo");
+                Intent intent = new Intent(getActivity(), ShareActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //268435456
+                getActivity().startActivity(intent);
+                getActivity().finish();
+            }
+        });
     }
        /*
     ------------------------------------ Firebase ---------------------------------------------

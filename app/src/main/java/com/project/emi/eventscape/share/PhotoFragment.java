@@ -74,8 +74,11 @@ public class PhotoFragment extends Fragment {
             Log.d(TAG, "onActivityResult: done taking a photo.");
             Log.d(TAG, "onActivityResult: attempting to navigate to final share screen.");
 
-            Bitmap bitmap;
-            bitmap = (Bitmap) data.getExtras().get("data");
+            Bitmap bitmap =null;
+            if(data !=null && data.getExtras()!=null){
+                bitmap = (Bitmap) data.getExtras().get("data");
+            }
+
 
             if(isRootTask()){
                 try{

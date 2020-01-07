@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".home.HomeActivity">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/container">
+
+    </FrameLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/relLayoutParent">
 
 
-        <!-- Header toolbar -->
+        <!-- top toolbar -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,7 +31,7 @@
 
         </RelativeLayout>
 
-        <!-- Body -->
+        <!-- Middle section (body) -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -33,9 +44,11 @@
         </RelativeLayout>
 
 
-        <!-- Fotter - navigation bar -->
+        <!-- bottom navigation -->
         <include layout="@layout/layout_bottom_navigation_view"/>
 
 
     </RelativeLayout>
+
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -20,7 +20,9 @@
         <activity android:name="com.project.emi.eventscape.MainActivity"/>
         <activity android:name=".likes.LikesActivity"/>
         <activity android:name=".profile.ProfileActivity"/>
-        <activity android:name=".search.SearchActivity"/>
+        <activity android:name=".search.SearchActivity"
+            android:windowSoftInputMode="adjustNothing"/>
+
         <activity android:name="com.project.emi.eventscape.share.ShareActivity"/>
         <activity android:name=".profile.AccountSettingsActivity"/>
         <activity android:name=".login.LoginActivity"/>

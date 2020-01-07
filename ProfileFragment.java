@@ -165,7 +165,7 @@ public class ProfileFragment extends Fragment {
                     Map<String,Object> objectMap = (HashMap<String, Object>) singleSnapshot.getValue();
 
                     photo.setCaption(objectMap.get(getString(R.string.field_caption)).toString());
-                    photo.setTags(objectMap.get(getString(R.string.field_tags)).toString());
+                    photo.setTags((objectMap.get("test")).toString());
                     photo.setPhoto_id(objectMap.get(getString(R.string.field_photo_id)).toString());
                     photo.setUser_id(objectMap.get(getString(R.string.field_user_id)).toString());
                     photo.setDate_created(objectMap.get(getString(R.string.field_date_created)).toString());
@@ -333,11 +333,13 @@ public class ProfileFragment extends Fragment {
      */
     private void setupBottomNavigationView(){
         Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
-        BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationView);
-        BottomNavigationViewHelper.enableNavigation(mContext,getActivity() ,bottomNavigationView);
-        Menu menu = bottomNavigationView.getMenu();
-        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
-        menuItem.setChecked(true);
+        if (bottomNavigationView != null) {
+            BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationView);
+            BottomNavigationViewHelper.enableNavigation(mContext,getActivity() ,bottomNavigationView);
+            Menu menu = bottomNavigationView.getMenu();
+            MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
+            menuItem.setChecked(true);
+        }
     }
 
       /*

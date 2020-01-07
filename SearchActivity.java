@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,7 +43,7 @@ public class SearchActivity extends AppCompatActivity{
     private Context mContext = SearchActivity.this;
 
     //widgets
-    private EditText mSearchParam;
+    private TextView mSearchParam;
     private ListView mListView;
 
     //vars
@@ -53,8 +54,8 @@ public class SearchActivity extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        mSearchParam = (EditText) findViewById(R.id.search);
-        mListView = (ListView) findViewById(R.id.listView);
+        mSearchParam = findViewById(R.id.search);
+        mListView = findViewById(R.id.listView);
         Log.d(TAG, "onCreate: started.");
 
         hideSoftKeyboard();

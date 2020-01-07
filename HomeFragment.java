@@ -64,25 +64,27 @@ public class HomeFragment extends Fragment {
         Query query = reference
                 .child(getString(R.string.dbname_following))
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
-                    Log.d(TAG, "onDataChange: found user: " +
-                            singleSnapshot.child(getString(R.string.field_user_id)).getValue());
+        if (query != null) {
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
+                        Log.d(TAG, "onDataChange: found user: " +
+                                singleSnapshot.child(getString(R.string.field_user_id)).getValue());
 
-                    mFollowing.add(singleSnapshot.child(getString(R.string.field_user_id)).getValue().toString());
+                        mFollowing.add(singleSnapshot.child(getString(R.string.field_user_id)).getValue().toString());
+                    }
+                    mFollowing.add(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    //get the photos
+                    getPhotos();
                 }
-                mFollowing.add(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                //get the photos
-                getPhotos();
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
+        }
     }
 
     private void getPhotos(){

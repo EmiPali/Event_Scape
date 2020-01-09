@@ -1,8 +1,7 @@
-package com.project.emi.eventscape.profile;
+package com.project.emi.eventscape.domain.profile;
 
 import android.content.Context;
 import android.content.Intent;
-import android.icu.util.ValueIterator;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,8 +13,11 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-//import android.widget.Toolbar;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,19 +28,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.project.emi.eventscape.R;
-import com.project.emi.eventscape.login.LoginActivity;
-import com.project.emi.eventscape.models.User;
+import com.project.emi.eventscape.adapters.GridImageAdapter;
 import com.project.emi.eventscape.models.UserAccountSettings;
 import com.project.emi.eventscape.models.UserSettings;
 import com.project.emi.eventscape.util.BottomNavigationViewHelper;
 import com.project.emi.eventscape.util.FirebaseMethods;
 import com.project.emi.eventscape.util.UniversalImageLoader;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.collection.CircularArray;
-import androidx.fragment.app.Fragment;
+import java.util.ArrayList;
+
 import de.hdodenhof.circleimageview.CircleImageView;
+
+//import android.widget.Toolbar;
 
 public class ProfileFragment extends Fragment {
 
@@ -63,6 +64,10 @@ public class ProfileFragment extends Fragment {
     private BottomNavigationViewEx bottomNavigationView;
     private Context mContext;
 
+    private ImageView profilePhoto;
+
+    private static final int NUM_GRID_COLUMNS = 3;
+
 
     @Nullable
     @Override
@@ -80,16 +85,21 @@ public class ProfileFragment extends Fragment {
         gridView = (GridView) view.findViewById(R.id.gridView);
         toolbar = (Toolbar) view.findViewById(R.id.profileToolBar);
         profileMenu = (ImageView) view.findViewById(R.id.profileMenu);
+        profilePhoto = (ImageView) view.findViewById(R.id.profile_photo);
         bottomNavigationView = (BottomNavigationViewEx) view.findViewById(R.id.bottomNavViewBar);
         mContext = getActivity();
         mFirebaseMethods = new FirebaseMethods(getActivity());
         Log.d(TAG, "onCreateView: stared.");
 
 
-        setupBottomNavigationView();
+        //setupBottomNavigationView();
         setupToolbar();
 
         setupFirebaseAuth();
+
+        tempGridSetup();
+
+        setProfileImage();
 
         TextView editProfile = (TextView) view.findViewById(R.id.textEditProfile);
         editProfile.setOnClickListener(new View.OnClickListener() {
@@ -142,17 +152,7 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-    /**
-     * BottomNavigationView setup
-     */
-    private void setupBottomNavigationView(){
-        Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
-        BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationView);
-        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationView);
-        Menu menu = bottomNavigationView.getMenu();
-        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
-        menuItem.setChecked(true);
-    }
+
 
       /*
     ------------------------------------ Firebase ---------------------------------------------
@@ -217,5 +217,40 @@ public class ProfileFragment extends Fragment {
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
+    }
+
+    // new
+    private void tempGridSetup(){
+        ArrayList<String> imgURLs = new ArrayList<>();
+        imgURLs.add("https://i.redd.it/9bf67ygj710z.jpg");
+        imgURLs.add("https://c1.staticflickr.com/5/4276/34102458063_7be616b993_o.jpg");
+        imgURLs.add("https://c1.staticflickr.com/5/4276/34102458063_7be616b993_o.jpg");
+        imgURLs.add("https://c1.staticflickr.com/5/4276/34102458063_7be616b993_o.jpg");
+        imgURLs.add("https://i.redd.it/59kjlxxf720z.jpg");
+        imgURLs.add("https://i.redd.it/pwduhknig00z.jpg");
+        imgURLs.add("https://i.redd.it/clusqsm4oxzy.jpg");
+        imgURLs.add("https://i.redd.it/svqvn7xs420z.jpg");
+        imgURLs.add("https://c1.staticflickr.com/5/4276/34102458063_7be616b993_o.jpg");
+        imgURLs.add("https://i.redd.it/89cjkojkl10z.jpg");
+        imgURLs.add("https://i.redd.it/aw7pv8jq4zzy.jpg");
+
+        setupImageGrid(imgURLs);
+    }
+
+    private void setupImageGrid(ArrayList<String> imgURLs){
+
+
+        int gridWidth = getResources().getDisplayMetrics().widthPixels;
+        int imageWidth = gridWidth/NUM_GRID_COLUMNS;
+        gridView.setColumnWidth(imageWidth);
+
+        GridImageAdapter adapter = new GridImageAdapter(mContext, R.layout.layout_grid_imageview, "", imgURLs);
+        gridView.setAdapter(adapter);
+    }
+
+    private void setProfileImage(){
+        Log.d(TAG, "setProfileImage: setting profile photo.");
+        String imgURL = "www.androidcentral.com/sites/androidcentral.com/files/styles/xlarge/public/article_images/2016/08/ac-lloyd.jpg?itok=bb72IeLf";
+        UniversalImageLoader.setImage(imgURL, profilePhoto, mProgressBar, "https://");
     }
 }

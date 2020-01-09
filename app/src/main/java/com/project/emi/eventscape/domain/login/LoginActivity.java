@@ -1,4 +1,4 @@
-package com.project.emi.eventscape.login;
+package com.project.emi.eventscape.domain.login;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,7 +17,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.project.emi.eventscape.R;
-import com.project.emi.eventscape.home.HomeActivity;
+import com.project.emi.eventscape.domain.home.HomeActivity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

@@ -1,4 +1,4 @@
-package com.project.emi.eventscape.util;
+package com.project.emi.eventscape.adapters;
 
 import java.util.ArrayList;
 import java.util.HashMap;

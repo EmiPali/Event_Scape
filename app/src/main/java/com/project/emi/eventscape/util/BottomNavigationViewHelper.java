@@ -9,9 +9,9 @@ import androidx.annotation.NonNull;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.project.emi.eventscape.R;
-import com.project.emi.eventscape.home.HomeActivity;
-import com.project.emi.eventscape.likes.LikesActivity;
-import com.project.emi.eventscape.profile.ProfileActivity;
+import com.project.emi.eventscape.domain.home.HomeActivity;
+import com.project.emi.eventscape.domain.profile.ProfileActivity;
+import com.project.emi.eventscape.domain.notification.NotificationActivity;
 import com.project.emi.eventscape.search.SearchActivity;
 
 import com.project.emi.eventscape.share.ShareActivity;
@@ -44,7 +44,7 @@ public class BottomNavigationViewHelper {
                         context.startActivity(intent_c);
                         break;
                     case R.id.ic_alert:
-                        Intent intent_a = new Intent(context, LikesActivity.class);
+                        Intent intent_a = new Intent(context, NotificationActivity.class);
                         context.startActivity(intent_a);
                         break;
                     case R.id.ic_android:

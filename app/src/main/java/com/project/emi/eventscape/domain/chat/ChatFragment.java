@@ -1,4 +1,4 @@
-package com.project.emi.eventscape.home;
+package com.project.emi.eventscape.domain.chat;
 
 
 import android.os.Bundle;
@@ -13,9 +13,9 @@ import android.widget.TextView;
 import com.project.emi.eventscape.R;
 
 
-public class MessageFragment extends Fragment {
-    private static final String TAG = "MessageFragment";
-    public MessageFragment() {
+public class ChatFragment extends Fragment {
+    private static final String TAG = "ChatFragment";
+    public ChatFragment() {
         // Required empty public constructor
     }
 

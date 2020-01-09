@@ -1,4 +1,4 @@
-package com.project.emi.eventscape.profile;
+package com.project.emi.eventscape.domain.profile;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,14 +10,14 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.project.emi.eventscape.R;
-import com.project.emi.eventscape.login.LoginActivity;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.project.emi.eventscape.R;
+import com.project.emi.eventscape.domain.login.LoginActivity;
 
 public class SignOutFragment extends Fragment {
 

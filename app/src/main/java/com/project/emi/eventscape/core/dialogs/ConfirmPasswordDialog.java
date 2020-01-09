@@ -1,4 +1,4 @@
-package com.project.emi.eventscape.dialogs;
+package com.project.emi.eventscape.core.dialogs;
 
 import android.content.Context;
 import android.os.Bundle;

@@ -1,11 +1,17 @@
 package com.project.emi.eventscape.util;
 
+import android.os.Environment;
+
 import java.io.File;
 import java.util.ArrayList;
 
-public class FileSearch {
+public class FileUtils {
+    //storage/emulated/0
+    public String ROOT_DIR = Environment.getExternalStorageDirectory().getPath();
 
-    //search a directory and return a list of all directorys contained inside
+    public String PICTURES = ROOT_DIR + "/Pictures";
+    public String CAMERA = ROOT_DIR + "/DCIM/camera";
+
 
     public static ArrayList<String> getDirectoryPaths(String directory){
         ArrayList<String> pathArray= new ArrayList<>();

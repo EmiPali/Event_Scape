@@ -1,4 +1,4 @@
-package com.project.emi.eventscape.util;
+package com.project.emi.eventscape.adapters;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;

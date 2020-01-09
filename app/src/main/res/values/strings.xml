@@ -30,5 +30,8 @@
     <string name="string_next">Next</string>
     <string name="string_share">Share</string>
 
+    //storage
+    <string name="storage_link">gs://eventscape-6ad46.appspot.com</string>
+
 
 </resources>

@@ -1,4 +1,4 @@
-package com.project.emi.eventscape.home;
+package com.project.emi.eventscape.domain.home;
 
 import android.content.Context;
 import android.net.Uri;

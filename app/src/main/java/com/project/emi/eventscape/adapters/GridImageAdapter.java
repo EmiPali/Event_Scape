@@ -1,4 +1,4 @@
-package com.project.emi.eventscape.util;
+package com.project.emi.eventscape.adapters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,6 +13,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.project.emi.eventscape.R;
+import com.project.emi.eventscape.util.SquareImageView;
 
 import java.util.ArrayList;
 

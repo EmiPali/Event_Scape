@@ -1,29 +1,22 @@
-package com.project.emi.eventscape.profile;
+package com.project.emi.eventscape.domain.profile;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.project.emi.eventscape.R;
 import com.project.emi.eventscape.util.BottomNavigationViewHelper;
-import com.project.emi.eventscape.util.GridImageAdapter;
-import com.project.emi.eventscape.util.UniversalImageLoader;
 
-import java.util.ArrayList;
+import static com.project.emi.eventscape.util.BottomNavigationViewHelper.setupBottomNavigationView;
 
 public class ProfileActivity extends AppCompatActivity{
     private static final String TAG = "ProfileActivity";
@@ -45,12 +38,12 @@ public class ProfileActivity extends AppCompatActivity{
         init();
 
 
-       /* setupBottomNavigationView();
-        setupToolbar();
-        setupActivityWidgets();
-        setProfileImage();
-
-        tempGridSetup();*/
+        setupBottomNavigationView();
+//        setupToolbar();
+//        setupActivityWidgets();
+//        setProfileImage();
+//
+//        tempGridSetup();
     }
 
     private void init()
@@ -122,7 +115,7 @@ public class ProfileActivity extends AppCompatActivity{
             }
         });
     }
-
+  */
     //BottomNavigationView setup
 
     private void setupBottomNavigationView(){
@@ -134,6 +127,6 @@ public class ProfileActivity extends AppCompatActivity{
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
     }
-     */
+
 
 }

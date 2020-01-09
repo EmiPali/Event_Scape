@@ -1,4 +1,4 @@
-package com.project.emi.eventscape.home;
+package com.project.emi.eventscape.domain.camera;
 
 import android.content.Context;
 import android.net.Uri;

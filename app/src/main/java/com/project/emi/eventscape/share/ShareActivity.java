@@ -16,7 +16,7 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.project.emi.eventscape.R;
 import com.project.emi.eventscape.util.BottomNavigationViewHelper;
 import com.project.emi.eventscape.util.Permissions;
-import com.project.emi.eventscape.util.SectionsPagerAdapter;
+import com.project.emi.eventscape.adapters.SectionsPagerAdapter;
 
 
 public class ShareActivity extends AppCompatActivity {

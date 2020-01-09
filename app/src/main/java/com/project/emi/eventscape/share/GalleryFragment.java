@@ -3,7 +3,6 @@ package com.project.emi.eventscape.share;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +19,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.project.emi.eventscape.R;
-import com.project.emi.eventscape.util.FilePaths;
-import com.project.emi.eventscape.util.FileSearch;
-import com.project.emi.eventscape.util.GridImageAdapter;
+import com.project.emi.eventscape.util.FileUtils;
+import com.project.emi.eventscape.adapters.GridImageAdapter;
 
 import java.util.ArrayList;
 
@@ -89,11 +87,11 @@ public class GalleryFragment extends Fragment {
     }
 
     private void init(){
-        FilePaths filePaths = new FilePaths();
+        FileUtils fileUtils = new FileUtils();
 
         //check for other folders indide "/storage/emulated/0/pictures"
-        if(FileSearch.getDirectoryPaths(filePaths.PICTURES) != null){
-            directories = FileSearch.getDirectoryPaths(filePaths.PICTURES);
+        if(FileUtils.getDirectoryPaths(fileUtils.PICTURES) != null){
+            directories = FileUtils.getDirectoryPaths(fileUtils.PICTURES);
         }
         ArrayList<String> directoryNames = new ArrayList<>();
         for(int i = 0; i < directories.size(); i++){
@@ -103,7 +101,7 @@ public class GalleryFragment extends Fragment {
             directoryNames.add(string);
         }
 
-        directories.add(filePaths.CAMERA);
+        directories.add(fileUtils.CAMERA);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, directoryNames);
@@ -126,10 +124,9 @@ public class GalleryFragment extends Fragment {
         });
     }
 
-
     private void setupGridView(String selectedDirectory){
         Log.d(TAG, "setupGridView: directory chosen: " + selectedDirectory);
-        final ArrayList<String> imgURLs = FileSearch.getFilePaths(selectedDirectory);
+        final ArrayList<String> imgURLs = FileUtils.getFilePaths(selectedDirectory);
 
         //set the grid column width
         int gridWidth = getResources().getDisplayMetrics().widthPixels;

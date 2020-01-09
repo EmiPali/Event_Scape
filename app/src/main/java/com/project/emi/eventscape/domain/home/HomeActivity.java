@@ -1,4 +1,4 @@
-package com.project.emi.eventscape.home;
+package com.project.emi.eventscape.domain.home;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,9 +17,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.project.emi.eventscape.R;
-import com.project.emi.eventscape.login.LoginActivity;
+import com.project.emi.eventscape.domain.camera.CameraFragment;
+import com.project.emi.eventscape.domain.chat.ChatFragment;
+import com.project.emi.eventscape.domain.login.LoginActivity;
 import com.project.emi.eventscape.util.BottomNavigationViewHelper;
-import com.project.emi.eventscape.util.SectionsPagerAdapter;
+import com.project.emi.eventscape.adapters.SectionsPagerAdapter;
 import com.project.emi.eventscape.util.UniversalImageLoader;
 
 
@@ -55,7 +57,7 @@ public class HomeActivity extends AppCompatActivity {
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new CameraFragment());
         adapter.addFragment(new HomeFragment());
-        adapter.addFragment(new MessageFragment());
+        adapter.addFragment(new ChatFragment());
         ViewPager viewPager = (ViewPager) findViewById(R.id.container);
         viewPager.setAdapter(adapter);
 

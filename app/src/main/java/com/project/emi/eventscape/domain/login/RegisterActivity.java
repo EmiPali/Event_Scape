@@ -1,4 +1,4 @@
-package com.project.emi.eventscape.login;
+package com.project.emi.eventscape.domain.login;
 
 import android.content.Context;
 import android.os.Bundle;

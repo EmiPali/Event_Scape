@@ -1,4 +1,4 @@
-package com.project.emi.eventscape.profile;
+package com.project.emi.eventscape.domain.profile;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,28 +13,21 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
-import com.project.emi.eventscape.R;
-import com.project.emi.eventscape.util.BottomNavigationViewHelper;
-import com.project.emi.eventscape.util.FirebaseMethods;
-import com.project.emi.eventscape.util.SectionsStatePagerAdapter;
-
-import java.util.ArrayList;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
+
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+import com.project.emi.eventscape.R;
+import com.project.emi.eventscape.util.BottomNavigationViewHelper;
+import com.project.emi.eventscape.adapters.SectionsStatePagerAdapter;
+
+import java.util.ArrayList;
 
 public class AccountSettingsActivity extends AppCompatActivity {
 
     private static final String TAG = "AccountSettingsActivity";
     private static final int ACTIVITY_NUM = 4;
-
-
-
 
     private Context mContext;
     private SectionsStatePagerAdapter pagerAdapter;
@@ -44,7 +37,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_settings);
+        setContentView(R.layout.activity_home);
         mContext = AccountSettingsActivity.this;
         Log.d(TAG, "onCreate: started.");
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -77,7 +70,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
 
     private void setupFragments(){
         pagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
-        pagerAdapter.addFragment(new EditProfileFragment(), getString(R.string.edit_profile_fragment)); //fragment 0
+       // pagerAdapter.addFragment(new EditProfileFragment(), getString(R.string.edit_profile_fragment)); //fragment 0
         pagerAdapter.addFragment(new SignOutFragment(), getString(R.string.sign_out_fragment)); //fragment 1
     }
 

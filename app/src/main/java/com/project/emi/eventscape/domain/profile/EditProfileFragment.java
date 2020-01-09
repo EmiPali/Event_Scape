@@ -1,4 +1,4 @@
-package com.project.emi.eventscape.profile;
+package com.project.emi.eventscape.domain.profile;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +9,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,21 +27,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.project.emi.eventscape.R;
-import com.project.emi.eventscape.dialogs.ConfirmPasswordDialog;
+import com.project.emi.eventscape.core.dialogs.ConfirmPasswordDialog;
 import com.project.emi.eventscape.models.User;
 import com.project.emi.eventscape.models.UserAccountSettings;
 import com.project.emi.eventscape.models.UserSettings;
 import com.project.emi.eventscape.util.FirebaseMethods;
 import com.project.emi.eventscape.util.UniversalImageLoader;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import de.hdodenhof.circleimageview.CircleImageView;
-
-import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class EditProfileFragment extends Fragment implements
         ConfirmPasswordDialog.OnConfirmPasswordListener{

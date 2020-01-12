@@ -12,7 +12,7 @@ import com.project.emi.eventscape.R;
 import com.project.emi.eventscape.domain.home.HomeActivity;
 import com.project.emi.eventscape.domain.profile.ProfileActivity;
 import com.project.emi.eventscape.domain.notification.NotificationActivity;
-import com.project.emi.eventscape.search.SearchActivity;
+import com.project.emi.eventscape.domain.search.SearchActivity;
 
 import com.project.emi.eventscape.share.ShareActivity;
 
@@ -26,30 +26,40 @@ public class BottomNavigationViewHelper {
         bottomNavigationViewEx.enableShiftingMode(false);
         bottomNavigationViewEx.setTextVisibility(false);
     }
-    public static void enableNavigation(final Context context, BottomNavigationViewEx view){
+    public static void enableNavigation(final Context context, BottomNavigationViewEx view, int currentIndex){
         view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()){
                     case R.id.ic_house:
-                        Intent intent_h = new Intent(context, HomeActivity.class);
-                        context.startActivity(intent_h);
+                        if(currentIndex!=0) {
+                            Intent intent_h = new Intent(context, HomeActivity.class);
+                            context.startActivity(intent_h);
+                        }
                         break;
                     case R.id.ic_search:
-                        Intent intent_s = new Intent(context, SearchActivity.class);
-                        context.startActivity(intent_s);
+                        if(currentIndex!=1) {
+                            Intent intent_s = new Intent(context, SearchActivity.class);
+                            context.startActivity(intent_s);
+                        }
                         break;
                     case R.id.ic_circle:
-                        Intent intent_c = new Intent(context, ShareActivity.class);
-                        context.startActivity(intent_c);
+                        if(currentIndex!=2) {
+                            Intent intent_c = new Intent(context, ShareActivity.class);
+                            context.startActivity(intent_c);
+                        }
                         break;
                     case R.id.ic_alert:
-                        Intent intent_a = new Intent(context, NotificationActivity.class);
-                        context.startActivity(intent_a);
+                        if(currentIndex!=3) {
+                            Intent intent_a = new Intent(context, NotificationActivity.class);
+                            context.startActivity(intent_a);
+                        }
                         break;
                     case R.id.ic_android:
-                        Intent intent_p = new Intent(context, ProfileActivity.class);
-                        context.startActivity(intent_p);
+                        if(currentIndex!=4) {
+                            Intent intent_p = new Intent(context, ProfileActivity.class);
+                            context.startActivity(intent_p);
+                        }
                         break;
                 }
                 return false;

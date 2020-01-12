@@ -55,7 +55,6 @@ public class HomeActivity extends AppCompatActivity {
      */
     private void setupViewPager(){
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new CameraFragment());
         adapter.addFragment(new HomeFragment());
         adapter.addFragment(new ChatFragment());
         ViewPager viewPager = (ViewPager) findViewById(R.id.container);
@@ -64,9 +63,10 @@ public class HomeActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById( R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_camera);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_arrow);
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_house);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_arrow);
     }
+
     //Bottom navigation View setup
     private void setupBottomNavigationView(){
         Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
@@ -76,7 +76,7 @@ public class HomeActivity extends AppCompatActivity {
        // if(bottomNavigationViewEx!=null){
          //   bd.setupBottomNavigationView(bottomNavigationViewEx);
         //}
-        BottomNavigationViewHelper.enableNavigation(mContext,bottomNavigationViewEx);
+        BottomNavigationViewHelper.enableNavigation(mContext,bottomNavigationViewEx, ACTIVITY_NUM);
         Menu menu = bottomNavigationViewEx.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);

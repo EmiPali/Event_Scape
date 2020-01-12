@@ -26,7 +26,7 @@ public class DatabaseHelper {
     private static DatabaseHelper instance;
 
     public static final String POSTS_DB_KEY = "posts";
-    public static final String PROFILES_DB_KEY = "profiles";
+    public static final String PROFILES_DB_KEY = "users";
     public static final String POST_COMMENTS_DB_KEY = "post-comments";
     public static final String POST_LIKES_DB_KEY = "post-likes";
     public static final String FOLLOW_DB_KEY = "follow";

@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
+        android:name=".Application"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="Eventscape"
@@ -20,7 +21,7 @@
         <activity android:name="com.project.emi.eventscape.MainActivity"/>
         <activity android:name=".domain.notification.NotificationActivity"/>
         <activity android:name=".domain.profile.ProfileActivity"/>
-        <activity android:name=".search.SearchActivity"/>
+        <activity android:name=".domain.search.SearchActivity"/>
         <activity android:name="com.project.emi.eventscape.share.ShareActivity"/>
         <activity android:name=".domain.profile.AccountSettingsActivity"/>
         <activity android:name=".domain.login.LoginActivity"/>

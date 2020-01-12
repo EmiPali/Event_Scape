@@ -26,6 +26,8 @@ import androidx.appcompat.app.AppCompatActivity;
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
+    private static final int SIGN_IN_GOOGLE = 9001;
+    public static final int LOGIN_REQUEST_CODE = 10001;
 
     //firebase
     private FirebaseAuth mAuth;

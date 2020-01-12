@@ -12,6 +12,10 @@ public class User {
     private long phone_number;
     private String email;
     private String username;
+    private String photoUrl;
+    private long likesCount;
+    private String registrationToken;
+
 
     public User(String user_id, long phone_number, String email, String username) {
         this.user_id = user_id;
@@ -57,14 +61,27 @@ public class User {
         this.username = username;
     }
 
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "user_id='" + user_id + '\'' +
-                ", phone_number='" + phone_number + '\'' +
-                ", email='" + email + '\'' +
-                ", username='" + username + '\'' +
-                '}';
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
+    public long getLikesCount() {
+        return likesCount;
+    }
+
+    public void setLikesCount(long likesCount) {
+        this.likesCount = likesCount;
+    }
+
+    public String getRegistrationToken() {
+        return registrationToken;
+    }
+
+    public void setRegistrationToken(String registrationToken) {
+        this.registrationToken = registrationToken;
     }
 }

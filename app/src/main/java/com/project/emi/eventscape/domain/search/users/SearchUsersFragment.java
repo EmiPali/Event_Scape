@@ -20,6 +20,7 @@ import com.project.emi.eventscape.R;
 import com.project.emi.eventscape.adapters.SearchUsersAdapter;
 import com.project.emi.eventscape.adapters.holders.UserViewHolder;
 import com.project.emi.eventscape.domain.base.BaseFragment;
+import com.project.emi.eventscape.domain.newprofile.NewProfileActivity;
 import com.project.emi.eventscape.domain.profile.ProfileActivity;
 import com.project.emi.eventscape.domain.search.Searchable;
 import com.project.emi.eventscape.models.User;
@@ -41,6 +42,13 @@ public class SearchUsersFragment extends BaseFragment<SearchUsersView, SearchUse
     private boolean searchInProgress = false;
 
     private int selectedItemPosition = RecyclerView.NO_POSITION;
+
+
+    public static final String USER_ID_EXTRA_KEY = "UsersListActivity.USER_ID_EXTRA_KEY";
+    public static final String USER_LIST_TYPE = "UsersListActivity.USER_LIST_TYPE";
+
+    public static final int UPDATE_FOLLOWING_STATE_REQ = 1501;
+    public static final int UPDATE_FOLLOWING_STATE_RESULT_OK = 1502;
 
 
     @Override
@@ -73,7 +81,7 @@ public class SearchUsersFragment extends BaseFragment<SearchUsersView, SearchUse
                 if (!searchInProgress) {
                     selectedItemPosition = position;
                     User profile = usersAdapter.getItemByPosition(position);
-                  //  presenter.onFollowButtonClick(followButton.getState(), ((User) profile).getUser_id());
+                    presenter.onFollowButtonClick(followButton.getState(), ((User) profile).getUser_id());
                 }
             }
         });
@@ -86,8 +94,8 @@ public class SearchUsersFragment extends BaseFragment<SearchUsersView, SearchUse
 
     @SuppressLint("RestrictedApi")
     private void openProfileActivity(String userId, View view) {
-        Intent intent = new Intent(getActivity(), ProfileActivity.class);
-        intent.putExtra(ProfileActivity.USER_ID_EXTRA_KEY, userId);
+        Intent intent = new Intent(getActivity(), NewProfileActivity.class);
+        intent.putExtra(NewProfileActivity.USER_ID_EXTRA_KEY, userId);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && view != null) {
 
@@ -96,9 +104,9 @@ public class SearchUsersFragment extends BaseFragment<SearchUsersView, SearchUse
             ActivityOptions options = ActivityOptions.
                     makeSceneTransitionAnimation(getActivity(),
                             new android.util.Pair<>(imageView, getString(R.string.post_author_image_transition_name)));
-          //  startActivityForResult(intent, UPDATE_FOLLOWING_STATE_REQ, options.toBundle());
+            startActivityForResult(intent, UPDATE_FOLLOWING_STATE_REQ, options.toBundle());
         } else {
-          //  startActivityForResult(intent, UPDATE_FOLLOWING_STATE_REQ);
+            startActivityForResult(intent, UPDATE_FOLLOWING_STATE_REQ);
         }
     }
 

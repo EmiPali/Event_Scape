@@ -19,6 +19,14 @@
             android:layout_below="@+id/relLayout1"
             android:background="@drawable/white_grey_border_bottom">
 
+            <!--<include-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="?attr/actionBarSize"-->
+                <!--app:layout_collapseMode="parallax"-->
+                <!--layout="@layout/profile_info"-->
+                <!--android:id="profile_info"/>-->
+
             <LinearLayout
                 android:id="@+id/linLayout"
                 android:layout_width="match_parent"
@@ -93,6 +101,7 @@
                     android:textColor="@color/link_blue"
                     android:textSize="16sp"
                     />
+
 
 
             </LinearLayout>

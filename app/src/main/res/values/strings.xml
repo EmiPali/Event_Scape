@@ -34,7 +34,10 @@
     <string name="storage_link">gs://eventscape-6ad46.appspot.com</string>
 
 
-
+    <!--Users list-->
+    <string name="title_followers">Followers</string>
+    <string name="title_followings">Followings</string>
+    <string name="message_empty_list">You don\'t have any %1$s yet</string>
 
 
     <!--Follow-->
@@ -73,12 +76,13 @@
     <string name="now_time_range">now</string>
 
 
-    <plurals name="new_posts_counter_format">
-        <item quantity="one">%1$d new post</item>
-        <item quantity="other">%1$d new posts</item>
-    </plurals>
+    <!--<plurals name="new_posts_counter_format">-->
+        <!--<item quantity="one">%1$d new post</item>-->
+        <!--<item quantity="other">%1$d new posts</item>-->
+    <!--</plurals>-->
 
-    <string name="post_author_image_transition_name" translatable="false">post_author_image_transition_name</string>
+    <string name="posted_by_label">Posted by:</string>
+
 
     <string name="permission_denied_error">Please check your rules to access the Firebase Realtime Database</string>
 
@@ -100,4 +104,57 @@
     <string name="error_fail_update_post">Fail to update post</string>
     <string name="error_post_was_removed">Post was removed</string>
     <string name="confirm_deletion_post">Delete this post?</string>
+
+    <string name="edit_comment_menu_item">Edit</string>
+    <string name="delete_comment_menu_item">Delete</string>
+    <string name="message_comment_was_removed">Comment was removed</string>
+    <string name="message_comment_was_edited">Comment was edited</string>
+    <string name="title_edit_comment">Edit comment</string>
+
+    <string name="button_title_save">Done</string>
+
+    <string name="add_complain">Complain</string>
+    <string name="edit_post_menu">Edit post</string>
+    <string name="delete_post_menu">Delete post</string>
+    <string name="complain_text">You can complain to this post if it contains violence,
+        bullying and threats, hate speech, tragic events and sexually explicit contents.
+        Nobody will see the post if you complain to it. You can\'t delete your complain.</string>
+
+    <string name="collapse_text_label">show less</string>
+    <string name="expand_text_label">show more</string>
+
+    <string name="post_author_image_transition_name" translatable="false">post_author_image_transition_name</string>
+    <string name="message_new_post_was_created">New post was created</string>
+    <string name="label_comments">Comments (%1$d):</string>
+
+    <plurals name="followers_counter_format">
+        <item quantity="one">follower</item>
+        <item quantity="other">followers</item>
+    </plurals>
+
+    <plurals name="followings_counter_format">
+        <item quantity="one">following</item>
+        <item quantity="other">followings</item>
+    </plurals>
+
+    <string name="send_comment_button_label">Send</string>
+    <string name="comment_text_hint">Enter your comment …</string>
+    <string name="button_post_comment">Post comment</string>
+
+    <string name="create_post_menu_label">Post</string>
+    <string name="create_post_full_menu_label">Create post</string>
+    <string name="sign_out_menu_label">Sign out</string>
+    <string name="edit_profile_menu_label">Edit profile</string>
+    <string name="post_image_transition_name" translatable="false">post_image_transition</string>
+
+    <plurals name="likes_counter_format">
+        <item quantity="one">like</item>
+        <item quantity="other">likes</item>
+    </plurals>
+
+    <plurals name="posts_counter_format">
+        <item quantity="one">post</item>
+        <item quantity="other">posts</item>
+    </plurals>
+
 </resources>

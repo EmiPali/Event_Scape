@@ -1,12 +1,8 @@
 package com.project.emi.eventscape.models;
 
-import android.content.Context;
-import android.util.Log;
+import java.io.Serializable;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-
-public class User {
+public class User implements Serializable {
 
     private String user_id;
     private long phone_number;

@@ -52,4 +52,12 @@ public class PreferencesUtil {
         editor.clear();
         editor.apply();
     }
+
+    public static void setUserId(Context context, String uid){
+        getSharedPreferences(context).edit().putString("uid", uid).commit();
+    }
+
+    public static String getUserUid(Context context){
+        return getSharedPreferences(context).getString("uid", "empty");
+    }
 }

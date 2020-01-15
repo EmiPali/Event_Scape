@@ -25,6 +25,11 @@
         <activity android:name="com.project.emi.eventscape.share.ShareActivity"/>
         <activity android:name=".domain.profile.AccountSettingsActivity"/>
         <activity android:name=".domain.login.LoginActivity"/>
+
+        <activity android:name=".domain.usersList.UsersListActivity"/>
+        <activity android:name=".domain.newprofile.NewProfileActivity"/>
+        <activity android:name=".domain.postDetails.PostDetailsActivity"/>
+
         <activity android:name=".share.NextActivity"/>
         <activity android:name=".domain.login.RegisterActivity"/>
         <activity android:name="com.project.emi.eventscape.domain.home.HomeActivity">

@@ -22,6 +22,7 @@ import com.project.emi.eventscape.domain.chat.ChatFragment;
 import com.project.emi.eventscape.domain.login.LoginActivity;
 import com.project.emi.eventscape.util.BottomNavigationViewHelper;
 import com.project.emi.eventscape.adapters.SectionsPagerAdapter;
+import com.project.emi.eventscape.util.PreferencesUtil;
 import com.project.emi.eventscape.util.UniversalImageLoader;
 
 
@@ -87,7 +88,7 @@ public class HomeActivity extends AppCompatActivity {
     //FIREBASE
     private void checkCurrentUser(FirebaseUser user){
         Log.d(TAG, "checkCurrentUser: checking if user is logged in.");
-// ti merr nje user nga db, dhe nese ka, qendron ktu ne home acxtivity
+
         if(user == null){
             Intent intent = new Intent(mContext, LoginActivity.class);
             startActivity(intent);
@@ -109,6 +110,7 @@ public class HomeActivity extends AppCompatActivity {
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    PreferencesUtil.setUserId(HomeActivity.this, user.getUid());
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");

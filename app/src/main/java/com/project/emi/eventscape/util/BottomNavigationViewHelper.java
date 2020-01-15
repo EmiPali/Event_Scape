@@ -9,7 +9,9 @@ import androidx.annotation.NonNull;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.project.emi.eventscape.R;
+import com.project.emi.eventscape.core.managers.ProfileManager;
 import com.project.emi.eventscape.domain.home.HomeActivity;
+import com.project.emi.eventscape.domain.newprofile.NewProfileActivity;
 import com.project.emi.eventscape.domain.profile.ProfileActivity;
 import com.project.emi.eventscape.domain.notification.NotificationActivity;
 import com.project.emi.eventscape.domain.search.SearchActivity;
@@ -57,7 +59,8 @@ public class BottomNavigationViewHelper {
                         break;
                     case R.id.ic_android:
                         if(currentIndex!=4) {
-                            Intent intent_p = new Intent(context, ProfileActivity.class);
+                            Intent intent_p = new Intent(context, NewProfileActivity.class);
+                            intent_p.putExtra(ProfileActivity.USER_ID_EXTRA_KEY, PreferencesUtil.getUserUid(context));
                             context.startActivity(intent_p);
                         }
                         break;

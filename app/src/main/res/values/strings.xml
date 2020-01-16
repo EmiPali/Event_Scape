@@ -75,11 +75,10 @@
     <string name="complain_sent">Complain was sent successfully</string>
     <string name="now_time_range">now</string>
 
-
-    <!--<plurals name="new_posts_counter_format">-->
-        <!--<item quantity="one">%1$d new post</item>-->
-        <!--<item quantity="other">%1$d new posts</item>-->
-    <!--</plurals>-->
+    <plurals name="new_posts_counter_format">
+        <item quantity="one">%1$d new post</item>
+        <item quantity="other">%1$d new posts</item>
+    </plurals>
 
     <string name="posted_by_label">Posted by:</string>
 
@@ -156,5 +155,17 @@
         <item quantity="one">post</item>
         <item quantity="other">posts</item>
     </plurals>
+
+    <string name="permissions_not_granted">Cancelling, required permissions are not granted</string>
+
+    <string name="hint_title">Title</string>
+    <string name="hint_description">Description</string>
+
+    <dimen name="grid_expected_size">120dp</dimen>
+    <dimen name="item_margin_horizontal">24dp</dimen>
+    <dimen name="item_margin_vertical">8dp</dimen>
+
+    <string name="permission_request_denied">Permission request denied</string>
+    <string name="error_gif">x or y bound size should be at least %1$dpx and file size should be no more than %2$sM</string>
 
 </resources>

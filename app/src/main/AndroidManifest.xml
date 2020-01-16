@@ -29,6 +29,7 @@
         <activity android:name=".domain.usersList.UsersListActivity"/>
         <activity android:name=".domain.newprofile.NewProfileActivity"/>
         <activity android:name=".domain.postDetails.PostDetailsActivity"/>
+        <activity android:name=".domain.post.createPost.CreatePostActivity"/>
 
         <activity android:name=".share.NextActivity"/>
         <activity android:name=".domain.login.RegisterActivity"/>

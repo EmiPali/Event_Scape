@@ -1,6 +1,4 @@
-
 package com.project.emi.eventscape;
-
 
 public class Application extends android.app.Application {
 
@@ -11,4 +9,5 @@ public class Application extends android.app.Application {
         super.onCreate();
         ApplicationHelper.initDatabaseHelper(this);
     }
+
 }

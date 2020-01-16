@@ -1,4 +1,3 @@
-
 package com.project.emi.eventscape.domain.usersList;
 
 import androidx.annotation.StringRes;

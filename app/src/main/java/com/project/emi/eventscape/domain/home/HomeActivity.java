@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.project.emi.eventscape.R;
+import com.project.emi.eventscape.domain.base.BaseActivity;
 import com.project.emi.eventscape.domain.camera.CameraFragment;
 import com.project.emi.eventscape.domain.chat.ChatFragment;
 import com.project.emi.eventscape.domain.login.LoginActivity;
@@ -26,7 +27,8 @@ import com.project.emi.eventscape.util.PreferencesUtil;
 import com.project.emi.eventscape.util.UniversalImageLoader;
 
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends BaseActivity<MainView, MainPresenter> implements MainView {
+
     private static final String TAG = "HomeActivity";
     private Context mContext = HomeActivity.this;
     private static final int ACTIVITY_NUM = 0;
@@ -51,9 +53,6 @@ public class HomeActivity extends AppCompatActivity {
         ImageLoader.getInstance().init(universalImageLoader.getConfig());
     }
 
-    /**
-     * This method is created to add 3 tabs : Camera, Home, Messages
-     */
     private void setupViewPager(){
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new HomeFragment());
@@ -133,6 +132,15 @@ public class HomeActivity extends AppCompatActivity {
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
+    }
+
+    @NonNull
+    @Override
+    public MainPresenter createPresenter() {
+        if (presenter == null) {
+            return new MainPresenter(this);
+        }
+        return presenter;
     }
 
 }

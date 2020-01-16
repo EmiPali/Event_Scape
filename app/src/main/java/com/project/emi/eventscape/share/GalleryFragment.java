@@ -30,10 +30,8 @@ import androidx.fragment.app.Fragment;
 public class GalleryFragment extends Fragment {
     private static final String TAG = "GalleryFragment";
 
-
     //constants
     private static final int NUM_GRID_COLUMNS = 3;
-
 
     //widgets
     private GridView gridView;
@@ -68,7 +66,6 @@ public class GalleryFragment extends Fragment {
             }
         });
 
-
         TextView nextScreen = (TextView) view.findViewById(R.id.tvNext);
         nextScreen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,15 +77,12 @@ public class GalleryFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
         init();
-
         return view;
     }
 
     private void init(){
         FileUtils fileUtils = new FileUtils();
-
         //check for other folders indide "/storage/emulated/0/pictures"
         if(FileUtils.getDirectoryPaths(fileUtils.PICTURES) != null){
             directories = FileUtils.getDirectoryPaths(fileUtils.PICTURES);
@@ -100,14 +94,11 @@ public class GalleryFragment extends Fragment {
             String string = directories.get(i).substring(index);
             directoryNames.add(string);
         }
-
         directories.add(fileUtils.CAMERA);
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, directoryNames);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         directorySpinner.setAdapter(adapter);
-
         directorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -119,7 +110,6 @@ public class GalleryFragment extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
     }

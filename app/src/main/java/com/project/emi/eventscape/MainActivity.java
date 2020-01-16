@@ -17,9 +17,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(); // firebase database reference
-        // add some text
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
         reference.setValue("This is a test.")
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

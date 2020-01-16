@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.project.emi.eventscape.R;
+import com.project.emi.eventscape.adapters.base.BasePostsAdapter;
 import com.project.emi.eventscape.adapters.holders.PostViewHolder;
 import com.project.emi.eventscape.controllers.LikeController;
 import com.project.emi.eventscape.domain.base.BaseActivity;

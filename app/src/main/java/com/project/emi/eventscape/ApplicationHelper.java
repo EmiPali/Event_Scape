@@ -1,9 +1,6 @@
 package com.project.emi.eventscape;
 
-
 import com.project.emi.eventscape.core.managers.DatabaseHelper;
-
-
 
 public class ApplicationHelper {
 

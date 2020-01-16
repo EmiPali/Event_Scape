@@ -10,11 +10,6 @@ import com.project.emi.eventscape.domain.base.BaseView;
 import com.project.emi.eventscape.util.LogUtil;
 import com.project.emi.eventscape.views.FollowButton;
 
-
-/**
- * Created by Alexey on 03.05.18.
- */
-
 class UsersListPresenter extends BasePresenter<UsersListView> {
 
     private final FollowManager followManager;
@@ -24,7 +19,6 @@ class UsersListPresenter extends BasePresenter<UsersListView> {
     UsersListPresenter(Activity activity) {
         super(activity);
         this.activity = activity;
-
         followManager = FollowManager.getInstance(context);
         currentUserId = FirebaseAuth.getInstance().getUid();
     }
@@ -34,7 +28,6 @@ class UsersListPresenter extends BasePresenter<UsersListView> {
             if (!isRefreshing) {
                 ifViewAttached(UsersListView::showLocalProgress);
             }
-
             FollowManager.getInstance(context).getFollowingsIdsList(userID, list -> {
                 ifViewAttached(view -> {
                     view.hideLocalProgress();
@@ -55,7 +48,6 @@ class UsersListPresenter extends BasePresenter<UsersListView> {
             if (!isRefreshing) {
                 ifViewAttached(UsersListView::showLocalProgress);
             }
-
             FollowManager.getInstance(context).getFollowersIdsList(userID, list -> {
                 ifViewAttached(view -> {
                     view.hideLocalProgress();
@@ -67,7 +59,6 @@ class UsersListPresenter extends BasePresenter<UsersListView> {
                         String message = context.getString(R.string.message_empty_list, context.getString(R.string.title_followers));
                         view.showEmptyListMessage(message);
                     }
-
                 });
             });
         }
@@ -93,7 +84,6 @@ class UsersListPresenter extends BasePresenter<UsersListView> {
                 view.setTitle(R.string.title_followings);
             }
         });
-
     }
 
     private void followUser(String targetUserId) {

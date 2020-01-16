@@ -26,6 +26,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.project.emi.eventscape.R;
 import com.project.emi.eventscape.adapters.holders.UserViewHolder;
+import com.project.emi.eventscape.core.managers.ProfileManager;
+import com.project.emi.eventscape.core.managers.listeners.OnObjectChangedListenerSimple;
 import com.project.emi.eventscape.models.User;
 
 import java.util.ArrayList;
@@ -73,13 +75,13 @@ public class SearchUsersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public void updateItem(int position) {
         User profile = getItemByPosition(position);
-//        ProfileManager.getInstance(activity.getApplicationContext()).getProfileSingleValue(profile.getId(), new OnObjectChangedListenerSimple<Profile>() {
-//            @Override
-//            public void onObjectChanged(Profile updatedProfile) {
-//                itemsList.set(position, updatedProfile);
-//                notifyItemChanged(position);
-//            }
-//        });
+        ProfileManager.getInstance(activity.getApplicationContext()).getProfileSingleValue(profile.getUser_id(), new OnObjectChangedListenerSimple<User>() {
+            @Override
+            public void onObjectChanged(User updatedProfile) {
+                itemsList.set(position, updatedProfile);
+                notifyItemChanged(position);
+            }
+        });
     }
 
     public User getItemByPosition(int position) {

@@ -77,9 +77,7 @@ public class UsersListActivity extends BaseActivity<UsersListView, UsersListPres
         if (userListType == -1) {
             throw new IllegalArgumentException("USER_LIST_TYPE should be defined for " + this.getClass().getSimpleName());
         }
-
         initContentView();
-
         presenter.chooseActivityTitle(userListType);
         presenter.loadUsersList(userID, userListType, false);
     }
@@ -96,11 +94,9 @@ public class UsersListActivity extends BaseActivity<UsersListView, UsersListPres
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == UPDATE_FOLLOWING_STATE_REQ && resultCode == UPDATE_FOLLOWING_STATE_RESULT_OK) {
             updateSelectedItem();
         }
-
 //        if (requestCode == LoginActivity.LOGIN_REQUEST_CODE && resultCode == RESULT_OK) {
 //            presenter.loadUsersList(userID, userListType, true);
 //        }
@@ -111,9 +107,7 @@ public class UsersListActivity extends BaseActivity<UsersListView, UsersListPres
             progressBar = findViewById(R.id.progressBar);
             swipeContainer = findViewById(R.id.swipeContainer);
             emptyListMessageTextView = findViewById(R.id.emptyListMessageTextView);
-
             swipeContainer.setOnRefreshListener(() -> presenter.onRefresh(userID, userListType));
-
             initProfilesListRecyclerView();
         }
     }
@@ -136,23 +130,17 @@ public class UsersListActivity extends BaseActivity<UsersListView, UsersListPres
                 presenter.onFollowButtonClick(followButton.getState(), userId);
             }
         });
-
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(),
                 ((LinearLayoutManager) recyclerView.getLayoutManager()).getOrientation()));
-
         recyclerView.setAdapter(usersAdapter);
-
     }
 
     @SuppressLint("RestrictedApi")
     private void openProfileActivity(String userId, View view) {
         Intent intent = new Intent(UsersListActivity.this, NewProfileActivity.class);
         intent.putExtra(NewProfileActivity.USER_ID_EXTRA_KEY, userId);
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && view != null) {
-
             ImageView imageView = view.findViewById(R.id.photoImageView);
-
             ActivityOptions options = ActivityOptions.
                     makeSceneTransitionAnimation(UsersListActivity.this,
                             new android.util.Pair<>(imageView, getString(R.string.post_author_image_transition_name)));

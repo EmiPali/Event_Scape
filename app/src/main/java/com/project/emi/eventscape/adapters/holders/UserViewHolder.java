@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.project.emi.eventscape.R;
+import com.project.emi.eventscape.core.managers.FollowManager;
 import com.project.emi.eventscape.core.managers.ProfileManager;
 import com.project.emi.eventscape.core.managers.listeners.OnObjectChangedListener;
 import com.project.emi.eventscape.core.managers.listeners.OnObjectChangedListenerSimple;
@@ -79,18 +80,18 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
         followButton.setVisibility(View.VISIBLE);
         followButton.setState(FollowState.NO_ONE_FOLLOW);
         String currentUserId = FirebaseAuth.getInstance().getUid();
-//        if (currentUserId != null) {
-//            if (!currentUserId.equals(profile.getId())) {
-//                FollowManager.getInstance(context).checkFollowState(currentUserId, profile.getId(), followState -> {
-//                    followButton.setVisibility(View.VISIBLE);
-//                    followButton.setState(followState);
-//                });
-//            } else {
-//                followButton.setState(FollowState.MY_PROFILE);
-//            }
-//        } else {
-//            followButton.setState(FollowState.NO_ONE_FOLLOW);
-//        }
+        if (currentUserId != null) {
+            if (!currentUserId.equals(profile.getUser_id())) {
+                FollowManager.getInstance(context).checkFollowState(currentUserId, profile.getUser_id(), followState -> {
+                    followButton.setVisibility(View.VISIBLE);
+                    followButton.setState(followState);
+                });
+            } else {
+                followButton.setState(FollowState.MY_PROFILE);
+            }
+        } else {
+            followButton.setState(FollowState.NO_ONE_FOLLOW);
+        }
 
         if (profile.getPhotoUrl() != null) {
             ImageUtil.loadImage(GlideApp.with(activity), profile.getPhotoUrl(), photoImageView);

@@ -89,7 +89,7 @@ public class SearchUsersFragment extends BaseFragment<SearchUsersView, SearchUse
         ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         recyclerView.setAdapter(usersAdapter);
 
-        presenter.loadUsersWithEmptySearch();
+         presenter.loadUsersWithEmptySearch();
     }
 
     @SuppressLint("RestrictedApi")

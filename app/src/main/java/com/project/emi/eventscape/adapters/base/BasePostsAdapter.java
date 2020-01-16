@@ -1,5 +1,5 @@
 
-package com.project.emi.eventscape.adapters;
+package com.project.emi.eventscape.adapters.base;
 
 import androidx.recyclerview.widget.RecyclerView;
 

@@ -10,6 +10,7 @@ import com.project.emi.eventscape.R;
 import com.project.emi.eventscape.adapters.base.BaseFragmentPostsAdapter;
 import com.project.emi.eventscape.adapters.holders.LoadViewHolder;
 import com.project.emi.eventscape.adapters.holders.PostViewHolder;
+import com.project.emi.eventscape.adapters.holders.TextPostViewHolder;
 import com.project.emi.eventscape.controllers.LikeController;
 import com.project.emi.eventscape.core.managers.PostManager;
 import com.project.emi.eventscape.core.managers.listeners.OnPostListChangedListener;
@@ -72,7 +73,11 @@ public class PostsAdapter extends BaseFragmentPostsAdapter {
         if (viewType == ItemType.ITEM.getTypeCode()) {
             return new PostViewHolder(inflater.inflate(R.layout.post_item_list_view, parent, false),
                     createOnClickListener(), (BaseActivity)fragment.getActivity());
-        } else {
+        } else if (viewType == ItemType.TEXT.getTypeCode()){
+            return new TextPostViewHolder(inflater.inflate(R.layout.text_post_item_list_view, parent, false),
+                    createOnClickListener(), (BaseActivity)fragment.getActivity());
+        }
+        else  {
             return new LoadViewHolder(inflater.inflate(R.layout.loading_view, parent, false));
         }
     }
@@ -90,7 +95,7 @@ public class PostsAdapter extends BaseFragmentPostsAdapter {
             @Override
             public void onLikeClick(LikeController likeController, int position) {
                 Post post = getItemByPosition(position);
-              //  likeController.handleLikeClickAction(fragment.getActivity(), post);
+                //likeController.handleLikeClickAction(fragment.getActivity(), post);
             }
 
             @Override
@@ -123,8 +128,10 @@ public class PostsAdapter extends BaseFragmentPostsAdapter {
 
         }
 
-        if (getItemViewType(position) != ItemType.LOAD.getTypeCode()) {
+        if (getItemViewType(position) == ItemType.ITEM.getTypeCode()) {
             ((PostViewHolder) holder).bindData(postList.get(position));
+        } else if(getItemViewType(position) == ItemType.TEXT.getTypeCode()){
+            ((TextPostViewHolder)holder).bindData(postList.get(position));
         }
     }
 

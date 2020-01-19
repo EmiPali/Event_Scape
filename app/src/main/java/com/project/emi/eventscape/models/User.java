@@ -1,8 +1,10 @@
 package com.project.emi.eventscape.models;
 
+import com.stfalcon.chatkit.commons.models.IUser;
+
 import java.io.Serializable;
 
-public class User implements Serializable {
+public class User implements Serializable, IUser {
 
     private String user_id;
     private long phone_number;
@@ -11,6 +13,9 @@ public class User implements Serializable {
     private String photoUrl;
     private long likesCount;
     private String registrationToken;
+
+    private String avaatar;
+    private boolean online;
 
 
     public User(String user_id, long phone_number, String email, String username) {
@@ -21,6 +26,14 @@ public class User implements Serializable {
     }
 
     public User() {
+
+    }
+
+    public User(String userId, String avatar, String email, boolean b) {
+        this.user_id = userId;
+        this.avaatar = avatar;
+        this.email = email;
+        this.online = b;
 
     }
 
@@ -79,5 +92,20 @@ public class User implements Serializable {
 
     public void setRegistrationToken(String registrationToken) {
         this.registrationToken = registrationToken;
+    }
+
+    @Override
+    public String getId() {
+        return user_id;
+    }
+
+    @Override
+    public String getName() {
+        return username;
+    }
+
+    @Override
+    public String getAvatar() {
+        return avaatar;
     }
 }

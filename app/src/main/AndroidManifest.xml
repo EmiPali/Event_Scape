@@ -31,6 +31,9 @@
         <activity android:name=".domain.postDetails.PostDetailsActivity"/>
         <activity android:name=".domain.post.createPost.CreatePostActivity"/>
 
+        <activity android:name=".domain.chatmessage.ChatActivity"/>
+        <activity android:name=".domain.chatmessage.DialogsActivity"/>
+
         <activity android:name=".share.NextActivity"/>
         <activity android:name=".domain.login.RegisterActivity"/>
         <activity android:name="com.project.emi.eventscape.domain.home.HomeActivity">

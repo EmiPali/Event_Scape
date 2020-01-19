@@ -21,6 +21,7 @@ import com.project.emi.eventscape.core.managers.PostManager;
 import com.project.emi.eventscape.core.managers.listeners.OnObjectExistListener;
 import com.project.emi.eventscape.core.managers.listeners.OnPostChangedListener;
 import com.project.emi.eventscape.domain.base.BaseActivity;
+import com.project.emi.eventscape.domain.home.HomeActivity;
 import com.project.emi.eventscape.models.Post;
 
 
@@ -201,10 +202,10 @@ public class LikeController {
                     if (baseActivity.hasInternetConnection()) {
                         doHandleLikeClickAction(baseActivity, post);
                     } else {
-                      //  showWarningMessage(baseActivity, R.string.internet_connection_failed);
+                       showWarningMessage(baseActivity, R.string.internet_connection_failed);
                     }
                 } else {
-                    //showWarningMessage(baseActivity, R.string.message_post_was_removed);
+                    showWarningMessage(baseActivity, R.string.message_post_was_removed);
                 }
             }
         });
@@ -217,7 +218,7 @@ public class LikeController {
                 if (baseActivity.hasInternetConnection()) {
                     doHandleLikeClickAction(baseActivity, post);
                 } else {
-                  //  showWarningMessage(baseActivity, R.string.internet_connection_failed);
+                   showWarningMessage(baseActivity, R.string.internet_connection_failed);
                 }
             }
 
@@ -228,13 +229,9 @@ public class LikeController {
         });
     }
 
-//    private void showWarningMessage(BaseActivity baseActivity, int messageId) {
-//        if (baseActivity instanceof MainActivity) {
-//            ((MainActivity) baseActivity).showFloatButtonRelatedSnackBar(messageId);
-//        } else {
-//            baseActivity.showSnackBar(messageId);
-//        }
-//    }
+    private void showWarningMessage(BaseActivity baseActivity, int messageId) {
+            baseActivity.showSnackBar(messageId);
+    }
 
     private void doHandleLikeClickAction(BaseActivity baseActivity, Post post) {
         if (baseActivity.checkAuthorization()) {

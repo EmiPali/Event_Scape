@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/intrinsic_padding"
+    android:paddingRight="@dimen/intrinsic_padding"
+    android:paddingTop="@dimen/intrinsic_padding">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        card_view:cardBackgroundColor="@android:color/white"
+        card_view:cardCornerRadius="2dp"
+        card_view:cardElevation="@dimen/post_card_elevation"
+        card_view:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/post_text"
+                android:gravity="left"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:maxLines="5"
+                android:lines="4"
+                android:padding="15dp"
+                android:text="dfgdfdfgfd"/>
+
+            <com.project.emi.eventscape.views.CircularImageView
+                android:id="@+id/authorImageView"
+                android:layout_width="@dimen/post_list_item_author_image_side"
+                android:layout_height="@dimen/post_list_item_author_image_side"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/post_text"
+                android:layout_marginRight="@dimen/intrinsic_padding"
+                android:layout_marginTop="80dp"
+                app:border="false"
+                app:shadow="true"
+                app:shadow_radius="@dimen/circle_image_shadow_radius"
+                app:shadow_color="@color/circle_image_shadow" />
+
+
+            <include
+                android:id="@+id/countersContainer"
+                layout="@layout/counters_panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/intrinsic_padding"
+                android:layout_marginLeft="@dimen/intrinsic_padding"
+                android:layout_marginTop="40dp"
+                android:layout_below="@+id/post_text"
+                android:layout_toStartOf="@+id/authorImageView" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

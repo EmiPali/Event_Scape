@@ -1,8 +1,9 @@
 package com.project.emi.eventscape.core.interactors;
+
 import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
-import com.google.android.gms.tasks.OnFailureListener;
+
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -31,7 +32,6 @@ import com.project.emi.eventscape.models.PostListResult;
 import com.project.emi.eventscape.util.ImageUtil;
 import com.project.emi.eventscape.util.LogUtil;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -50,17 +50,17 @@ public class PostInteractor {
     private DatabaseHelper databaseHelper;
     private Context context;
 
+    private PostInteractor(Context context) {
+        this.context = context;
+        databaseHelper = ApplicationHelper.getDatabaseHelper();
+    }
+
     public static PostInteractor getInstance(Context context) {
         if (instance == null) {
             instance = new PostInteractor(context);
         }
 
         return instance;
-    }
-
-    private PostInteractor(Context context) {
-        this.context = context;
-        databaseHelper = ApplicationHelper.getDatabaseHelper();
     }
 
     public String generatePostId() {
@@ -251,14 +251,15 @@ public class PostInteractor {
                         post.setAuthorId((String) mapObj.get("authorId"));
                         post.setCreatedDate(createdDate);
                         String itemType = (String) ((Map<String, Object>) obj).get("itemType");
-                        if(itemType!=null){
-                           if(itemType.equals("ITEM")){
-                               post.setItemType(ItemType.ITEM);
-                           } else {
-                               post.setItemType(ItemType.LOAD);
-                           }
-
-                           }
+                        if (itemType != null) {
+                            if (itemType.equals("ITEM")) {
+                                post.setItemType(ItemType.ITEM);
+                            } else if (itemType.equals("TEXT")) {
+                                post.setItemType(ItemType.TEXT);
+                            } else {
+                                post.setItemType(ItemType.LOAD);
+                            }
+                        }
                         if (mapObj.containsKey("commentsCount")) {
                             post.setCommentsCount((long) mapObj.get("commentsCount"));
                         }
@@ -267,6 +268,9 @@ public class PostInteractor {
                         }
                         if (mapObj.containsKey("watchersCount")) {
                             post.setWatchersCount((long) mapObj.get("watchersCount"));
+                        }
+                        if (mapObj.containsKey("textContent")) {
+                            post.setTextContent((String) mapObj.get("textContent"));
                         }
                         list.add(post);
                     }
@@ -286,7 +290,6 @@ public class PostInteractor {
     private boolean isPostValid(Map<String, Object> post) {
         return post.containsKey("title")
                 && post.containsKey("description")
-                && post.containsKey("imageTitle")
                 && post.containsKey("authorId")
                 && post.containsKey("description");
     }
@@ -311,7 +314,7 @@ public class PostInteractor {
     }
 
     public void subscribeToNewPosts() {
-       // FirebaseMessaging.getInstance().subscribeToTopic("postsTopic");
+        // FirebaseMessaging.getInstance().subscribeToTopic("postsTopic");
     }
 
     public void removePost(final Post post, final OnTaskCompleteListener onTaskCompleteListener) {
@@ -321,7 +324,7 @@ public class PostInteractor {
         removeImageTask.addOnSuccessListener(aVoid -> {
             removePost(post).addOnCompleteListener(task -> {
                 onTaskCompleteListener.onTaskComplete(task.isSuccessful());
-              //  ProfileInteractor.getInstance(context).updateProfileLikeCountAfterRemovingPost(post);
+                //  ProfileInteractor.getInstance(context).updateProfileLikeCountAfterRemovingPost(post);
                 removeObjectsRelatedToPost(post.getId());
                 LogUtil.logDebug(TAG, "removePost(), is success: " + task.isSuccessful());
             });
@@ -533,7 +536,7 @@ public class PostInteractor {
 
     public ValueEventListener searchPostsByTitle(String searchText, OnDataChangedListener<Post> onDataChangedListener) {
         DatabaseReference reference = databaseHelper.getDatabaseReference().child(DatabaseHelper.POSTS_DB_KEY);
-        ValueEventListener valueEventListener = getSearchQuery(reference,"title", searchText).addValueEventListener(new ValueEventListener() {
+        ValueEventListener valueEventListener = getSearchQuery(reference, "title", searchText).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 PostListResult result = parsePostList((Map<String, Object>) dataSnapshot.getValue());
@@ -551,9 +554,9 @@ public class PostInteractor {
         return valueEventListener;
     }
 
-    public ValueEventListener filterPostsByLikes(int  limit, OnDataChangedListener<Post> onDataChangedListener) {
+    public ValueEventListener filterPostsByLikes(int limit, OnDataChangedListener<Post> onDataChangedListener) {
         DatabaseReference reference = databaseHelper.getDatabaseReference().child(DatabaseHelper.POSTS_DB_KEY);
-        ValueEventListener valueEventListener = getFilteredQuery(reference,"likesCount", limit).addValueEventListener(new ValueEventListener() {
+        ValueEventListener valueEventListener = getFilteredQuery(reference, "likesCount", limit).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 PostListResult result = parsePostList((Map<String, Object>) dataSnapshot.getValue());

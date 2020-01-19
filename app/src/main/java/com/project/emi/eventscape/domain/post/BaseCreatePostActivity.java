@@ -19,6 +19,8 @@ package com.project.emi.eventscape.domain.post;
 import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -34,6 +36,7 @@ public abstract class BaseCreatePostActivity<V extends BaseCreatePostView, P ext
     protected ProgressBar progressBar;
     protected EditText titleEditText;
     protected EditText descriptionEditText;
+    protected Button postButton;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -47,6 +50,7 @@ public abstract class BaseCreatePostActivity<V extends BaseCreatePostView, P ext
         titleEditText = findViewById(R.id.titleEditText);
         descriptionEditText = findViewById(R.id.descriptionEditText);
         progressBar = findViewById(R.id.progressBar);
+        postButton = findViewById(R.id.createPost);
 
         imageView = findViewById(R.id.imageView);
 
@@ -59,6 +63,13 @@ public abstract class BaseCreatePostActivity<V extends BaseCreatePostView, P ext
             }
 
             return false;
+        });
+
+        postButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.doSavePost(null);
+            }
         });
     }
 

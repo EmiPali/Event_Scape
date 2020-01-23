@@ -1,7 +1,6 @@
 package com.project.emi.eventscape.domain.home;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
@@ -18,8 +17,7 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.project.emi.eventscape.R;
 import com.project.emi.eventscape.domain.base.BaseActivity;
-import com.project.emi.eventscape.domain.camera.CameraFragment;
-import com.project.emi.eventscape.domain.chat.ChatFragment;
+import com.project.emi.eventscape.domain.chat.dialog.ChatFragment;
 import com.project.emi.eventscape.domain.login.LoginActivity;
 import com.project.emi.eventscape.util.BottomNavigationViewHelper;
 import com.project.emi.eventscape.adapters.SectionsPagerAdapter;

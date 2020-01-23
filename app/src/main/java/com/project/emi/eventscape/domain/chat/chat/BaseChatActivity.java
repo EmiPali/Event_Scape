@@ -1,11 +1,11 @@
-package com.project.emi.eventscape.domain.chatmessage;
+package com.project.emi.eventscape.domain.chat.chat;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +14,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.project.emi.eventscape.R;
+import com.project.emi.eventscape.core.managers.DatabaseHelper;
+import com.project.emi.eventscape.domain.chat.AppUtils;
+import com.project.emi.eventscape.domain.chat.ChatHelper;
+import com.project.emi.eventscape.domain.chat.Message;
 import com.project.emi.eventscape.models.User;
 import com.project.emi.eventscape.util.MySharedPref;
 import com.project.emi.eventscape.util.PreferencesUtil;
@@ -26,7 +30,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-import static com.project.emi.eventscape.domain.chatmessage.FirebaseChatHelper.chatMessagesReference;
 
 
 public class BaseChatActivity extends AppCompatActivity implements MessagesListAdapter.SelectionListener,
@@ -36,11 +39,12 @@ public class BaseChatActivity extends AppCompatActivity implements MessagesListA
     protected final String senderId = "0";
     protected ImageLoader imageLoader;
     protected MessagesListAdapter<Message> messagesAdapter;
-
-    private String USER_ID;
-    protected String CHAT_ID = "dialogId";
-
+    protected String CHAT_ID;
     protected Menu menu;
+    protected String RECIPIENT_ID;
+    private String USER_ID;
+    private User user;
+    private User recipient;
     private int selectionCount;
     private Date lastLoadedDate;
     private ActionBar actionBar;
@@ -59,26 +63,38 @@ public class BaseChatActivity extends AppCompatActivity implements MessagesListA
         };
         USER_ID = PreferencesUtil.getUserUid(this);
 
-        ChatHelper.dialogsReference.child(CHAT_ID).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                TOTAL_MESSAGES_COUNT = dataSnapshot.getChildrenCount();
-                Log.d("SkerdiFirebase", "TOTAL MESSAGES COUNT = " + TOTAL_MESSAGES_COUNT);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        loadMessagesFirebaseNoQuery(USER_ID, CHAT_ID);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         loadMessagesFirebaseNoQuery(USER_ID, CHAT_ID);
+    }
+
+    protected void fetchUsers() {
+        DatabaseHelper.getInstance(this).getDatabaseReference().child("users").child(USER_ID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                user = dataSnapshot.getValue(User.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        DatabaseHelper.getInstance(this).getDatabaseReference().child("users").child(RECIPIENT_ID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                recipient = dataSnapshot.getValue(User.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
 
@@ -141,54 +157,17 @@ public class BaseChatActivity extends AppCompatActivity implements MessagesListA
                     Long time = (Long) dataSnap.child("createdAt").getValue();
                     String text = dataSnap.child("text").getValue().toString();
                     String id = dataSnap.child("authorId").getValue().toString();
-                    String avatarUrl = "https://pickaface.net/gallery/avatar/20151109_144853_2380_sample.png";
-//                    StringBuilder myAvatar = new StringBuilder();
-//                    myAvatar.append(CodesUtil.SPECTRUM_WEB_AVATAR_URL).append(avatarUrl);
-                    //  Log.d("AvatarURL", myAvatar.toString());
                     if (id.equals(userId)) {
-                        result.add(new Message(id, new User(userId, "Skerdi", avatarUrl, true), text, "Skerdi", new Date(time)));
-                    }
-//
-
-                    else {
-                        StringBuilder Url = new StringBuilder();
-                        Url.append("http://spectrumtrack.com/").append("user_profile/team.png");
-                        result.add(new Message(id, new User("otherid", "HeadQuarter", avatarUrl, true), text, "Headquarter", new Date(time)));
+                        result.add(new Message(id, user, text, user.getName(), new Date(time)));
+                    } else {
+                        result.add(new Message(id, recipient, text, recipient.getName(), new Date(time)));
                     }
                 }
-
-                Log.d("SkerdiFirebase", " Mesazhet u moren tn futen ne adapter :  " + result.size());
-                if (messagesAdapter.getItemCount() != 0) {
+                if(messagesAdapter.getItemCount()>0 && result.size()>0){
                     messagesAdapter.clear();
                     messagesAdapter.notifyDataSetChanged();
                 }
-
                 messagesAdapter.addToEnd(result, true);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    public void setSeenMessages(final String userId, final String chatId) {
-        chatMessagesReference.child(chatId).child(userId).orderByChild("status").equalTo("sent").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot small : dataSnapshot.getChildren()) {
-                    Log.d("SkerdiFirebase", small.child("text").getValue().toString());
-                    long time = (long) small.child("createdAt").getValue();
-                    String id = small.child("id").getValue().toString();
-                    String name = small.child("name").getValue().toString();
-                    String status = "seen";
-                    String text = small.child("text").getValue().toString();
-                    TransportMessage transportMessage = new TransportMessage(time, id, name, status, text);
-                    if (!id.equals(userId))
-                        chatMessagesReference.child(chatId).child(userId).child(small.getKey()).setValue(transportMessage);
-                }
             }
 
             @Override

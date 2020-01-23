@@ -14,7 +14,6 @@ public class User implements Serializable, IUser {
     private long likesCount;
     private String registrationToken;
 
-    private String avaatar;
     private boolean online;
 
 
@@ -31,7 +30,7 @@ public class User implements Serializable, IUser {
 
     public User(String userId, String avatar, String email, boolean b) {
         this.user_id = userId;
-        this.avaatar = avatar;
+        this.photoUrl = avatar;
         this.email = email;
         this.online = b;
 
@@ -106,6 +105,6 @@ public class User implements Serializable, IUser {
 
     @Override
     public String getAvatar() {
-        return avaatar;
+        return photoUrl;
     }
 }

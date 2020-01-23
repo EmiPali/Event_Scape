@@ -1,4 +1,4 @@
-package com.project.emi.eventscape.domain.chatmessage;
+package com.project.emi.eventscape.domain.chat.chat;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 
 import com.project.emi.eventscape.R;
+import com.project.emi.eventscape.domain.chat.AppUtils;
+import com.project.emi.eventscape.domain.chat.Message;
 import com.project.emi.eventscape.util.CodesUtil;
 import com.project.emi.eventscape.util.MySharedPref;
 import com.project.emi.eventscape.util.PreferencesUtil;
@@ -45,6 +47,7 @@ public class ChatActivity extends BaseChatActivity implements MessageInput.Input
         input = findViewById(R.id.input);
         input.setInputListener(this);
         mySharedPref = new MySharedPref(this);
+        userId = PreferencesUtil.getUserUid(this);
         initAdapter();
         if (getIntent().getStringExtra(CodesUtil.START_CHAT_ACTIVITY_CODE) != null) {
             if (getIntent().getStringExtra(CodesUtil.START_CHAT_ACTIVITY_CODE).equals(CodesUtil.START_CHAT_FROM_BUBBLE)) {
@@ -52,9 +55,11 @@ public class ChatActivity extends BaseChatActivity implements MessageInput.Input
             }
         }
         this.CHAT_ID = getIntent().getStringExtra(CodesUtil.CHAT_ID);
+        this.RECIPIENT_ID = getIntent().getStringExtra(CodesUtil.RECIPIENT_ID);
         if(CHAT_ID != null){
-            userId = PreferencesUtil.getUserUid(this);
             toolbar.setTitle("Abetare");
+            fetchUsers();
+            loadMessagesFirebaseNoQuery(userId, CHAT_ID);
         } else {
             CHAT_ID = "dialogId";
             toolbar.setTitle("Error!");

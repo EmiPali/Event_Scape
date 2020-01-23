@@ -1,4 +1,4 @@
-package com.project.emi.eventscape.domain.chatmessage;
+package com.project.emi.eventscape.domain.chat;
 
 import android.content.Context;
 import android.widget.Toast;

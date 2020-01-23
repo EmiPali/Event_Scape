@@ -36,4 +36,5 @@ public class CodesUtil {
     public static final CharSequence DRIVING_TIME_PREFERENCE ="driving_time_preference" ;
     public static final String FINISH_TRIP_LAUNCH = "finish_trip_launch" ;
     public static final String CHAT_ID ="Chat_ID";
+    public static final String RECIPIENT_ID ="RecipeientID" ;
 }

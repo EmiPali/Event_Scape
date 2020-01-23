@@ -1,4 +1,4 @@
-package com.project.emi.eventscape.domain.chatmessage;
+package com.project.emi.eventscape.domain.chat;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

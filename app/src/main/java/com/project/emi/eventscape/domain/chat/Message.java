@@ -1,4 +1,4 @@
-package com.project.emi.eventscape.domain.chatmessage;
+package com.project.emi.eventscape.domain.chat;
 
 import com.google.firebase.database.Exclude;
 import com.project.emi.eventscape.models.User;
@@ -14,24 +14,24 @@ public class Message implements IMessage,
 
     private String id;
     private String text;
-    private Date createdat;
+    private Date createdDate;
     private long createdAt;
     private User user;
     private Image image;
     private Voice voice;
-    private String UserId;
+    private String authorId;
     private String senderName;
 
     public Message(){
 
     }
 
-    public Message(String id, User user, String text, String senderName, Date createdat) {
+    public Message(String id, User user, String text, String senderName, Date createdDate) {
         this.user=user;
-        this.UserId = user.getUser_id();
+        this.authorId = user.getUser_id();
         this.senderName = senderName;
-        this.createdat = createdat;
-        this.createdAt = this.createdat.getTime();
+        this.createdDate = createdDate;
+        this.createdAt = this.createdDate.getTime();
         this.text = text;
     }
 
@@ -55,7 +55,7 @@ public class Message implements IMessage,
 
     @Override
     public Date getCreatedAt() {
-        return this.createdat;
+        return this.createdDate;
     }
 
     @Override
@@ -87,6 +87,10 @@ public class Message implements IMessage,
         this.createdAt = createdAt;
     }
 
+    public long getTime(){
+        return  this.createdAt;
+    }
+
     public static class Image {
 
         private String url;
@@ -113,5 +117,37 @@ public class Message implements IMessage,
         public int getDuration() {
             return duration;
         }
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public String getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
+    }
+
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
     }
 }

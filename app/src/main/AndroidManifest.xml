@@ -31,7 +31,7 @@
         <activity android:name=".domain.postDetails.PostDetailsActivity"/>
         <activity android:name=".domain.post.createPost.CreatePostActivity"/>
 
-        <activity android:name=".domain.chatmessage.ChatActivity"/>
+        <activity android:name=".domain.chat.chat.ChatActivity"/>
         <activity android:name=".domain.chatmessage.DialogsActivity"/>
 
         <activity android:name=".share.NextActivity"/>

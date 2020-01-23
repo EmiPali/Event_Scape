@@ -1,5 +1,6 @@
-package com.project.emi.eventscape.domain.chatmessage;
+package com.project.emi.eventscape.domain.chat.dialog;
 
+import com.project.emi.eventscape.domain.chat.Message;
 import com.project.emi.eventscape.models.User;
 import com.stfalcon.chatkit.commons.models.IDialog;
 
@@ -66,5 +67,28 @@ public class Dialog implements IDialog<Message> {
 
     public void setUnreadCount(int unreadCount) {
         this.unreadCount = unreadCount;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setDialogPhoto(String dialogPhoto) {
+        this.dialogPhoto = dialogPhoto;
+    }
+
+    public void setDialogName(String dialogName) {
+        this.dialogName = dialogName;
+    }
+
+    public void setUsers(ArrayList<User> users) {
+        this.users = users;
+    }
+
+    public void addUser(User user){
+        if(users==null){
+            this.users =new ArrayList<>();
+        }
+        users.add(user);
     }
 }

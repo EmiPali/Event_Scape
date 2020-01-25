@@ -40,8 +40,11 @@ import com.project.emi.eventscape.core.managers.PostManager;
 import com.project.emi.eventscape.core.managers.listeners.OnObjectExistListener;
 import com.project.emi.eventscape.domain.base.BaseActivity;
 import com.project.emi.eventscape.domain.base.BaseFragment;
+import com.project.emi.eventscape.domain.newprofile.NewProfileActivity;
+import com.project.emi.eventscape.domain.postDetails.PostDetailsActivity;
 import com.project.emi.eventscape.domain.profile.ProfileActivity;
 import com.project.emi.eventscape.domain.search.Searchable;
+import com.project.emi.eventscape.enums.PostStatus;
 import com.project.emi.eventscape.models.Post;
 import com.project.emi.eventscape.util.AnimationUtils;
 
@@ -96,21 +99,21 @@ public class SearchPostsFragment extends BaseFragment<SearchPostsView, SearchPos
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-//        if (resultCode == RESULT_OK) {
-//            switch (requestCode) {
-//                case PostDetailsActivity.UPDATE_POST_REQUEST:
-//                    if (data != null) {
-//                        PostStatus postStatus = (PostStatus) data.getSerializableExtra(PostDetailsActivity.POST_STATUS_EXTRA_KEY);
-//                        if (postStatus.equals(PostStatus.REMOVED)) {
-//                            postsAdapter.removeSelectedPost();
-//
-//                        } else if (postStatus.equals(PostStatus.UPDATED)) {
-//                            postsAdapter.updateSelectedPost();
-//                        }
-//                    }
-//                    break;
-//            }
-//        }
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case PostDetailsActivity.UPDATE_POST_REQUEST:
+                    if (data != null) {
+                        PostStatus postStatus = (PostStatus) data.getSerializableExtra(PostDetailsActivity.POST_STATUS_EXTRA_KEY);
+                        if (postStatus.equals(PostStatus.REMOVED)) {
+                            postsAdapter.removeSelectedPost();
+
+                        } else if (postStatus.equals(PostStatus.UPDATED)) {
+                            postsAdapter.updateSelectedPost();
+                        }
+                    }
+                    break;
+            }
+        }
     }
 
     private void initRecyclerView() {
@@ -150,41 +153,40 @@ public class SearchPostsFragment extends BaseFragment<SearchPostsView, SearchPos
 
     @SuppressLint("RestrictedApi")
     public void openProfileActivity(String userId, View view) {
-        Intent intent = new Intent(getActivity(), ProfileActivity.class);
-        intent.putExtra(ProfileActivity.USER_ID_EXTRA_KEY, userId);
+        Intent intent = new Intent(getActivity(), NewProfileActivity.class);
+        intent.putExtra(NewProfileActivity.USER_ID_EXTRA_KEY, userId);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && view != null) {
 
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && view != null) {
-//
-//            View authorImageView = view.findViewById(R.id.authorImageView);
-//
-//            ActivityOptions options = ActivityOptions.
-//                    makeSceneTransitionAnimation(getActivity(),
-//                            new Pair<>(authorImageView, getString(R.string.post_author_image_transition_name)));
-//            startActivityForResult(intent, ProfileActivity.CREATE_POST_FROM_PROFILE_REQUEST, options.toBundle());
-//        } else {
-//            startActivityForResult(intent, ProfileActivity.CREATE_POST_FROM_PROFILE_REQUEST);
-//        }
+            View authorImageView = view.findViewById(R.id.authorImageView);
+
+            ActivityOptions options = ActivityOptions.
+                    makeSceneTransitionAnimation(getActivity(),
+                            new Pair<>(authorImageView, getString(R.string.post_author_image_transition_name)));
+            startActivityForResult(intent, NewProfileActivity.CREATE_POST_FROM_PROFILE_REQUEST, options.toBundle());
+        } else {
+            startActivityForResult(intent, NewProfileActivity.CREATE_POST_FROM_PROFILE_REQUEST);
+        }
     }
 
 
     @SuppressLint("RestrictedApi")
     private void openPostDetailsActivity(Post post, View v) {
-//        Intent intent = new Intent(getActivity(), PostDetailsActivity.class);
-//        intent.putExtra(PostDetailsActivity.POST_ID_EXTRA_KEY, post.getId());
-//        intent.putExtra(PostDetailsActivity.AUTHOR_ANIMATION_NEEDED_EXTRA_KEY, true);
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//
-//            View imageView = v.findViewById(R.id.postImageView);
-//
-//            ActivityOptions options = ActivityOptions.
-//                    makeSceneTransitionAnimation(getActivity(),
-//                            new Pair<>(imageView, getString(R.string.post_image_transition_name))
-//                    );
-//            startActivityForResult(intent, PostDetailsActivity.UPDATE_POST_REQUEST, options.toBundle());
-//        } else {
-//            startActivityForResult(intent, PostDetailsActivity.UPDATE_POST_REQUEST);
-//        }
+        Intent intent = new Intent(getActivity(), PostDetailsActivity.class);
+        intent.putExtra(PostDetailsActivity.POST_ID_EXTRA_KEY, post.getId());
+        intent.putExtra(PostDetailsActivity.AUTHOR_ANIMATION_NEEDED_EXTRA_KEY, true);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+            View imageView = v.findViewById(R.id.postImageView);
+
+            ActivityOptions options = ActivityOptions.
+                    makeSceneTransitionAnimation(getActivity(),
+                            new Pair<>(imageView, getString(R.string.post_image_transition_name))
+                    );
+            startActivityForResult(intent, PostDetailsActivity.UPDATE_POST_REQUEST, options.toBundle());
+        } else {
+            startActivityForResult(intent, PostDetailsActivity.UPDATE_POST_REQUEST);
+        }
     }
 
 

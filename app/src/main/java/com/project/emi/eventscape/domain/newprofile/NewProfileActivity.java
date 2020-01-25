@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Spannable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -38,7 +39,10 @@ import com.project.emi.eventscape.core.dialogs.UnfollowConfirmationDialog;
 import com.project.emi.eventscape.core.managers.FollowManager;
 import com.project.emi.eventscape.core.managers.ProfileManager;
 import com.project.emi.eventscape.domain.base.BaseActivity;
+import com.project.emi.eventscape.domain.login.LoginActivity;
+import com.project.emi.eventscape.domain.post.createPost.CreatePostActivity;
 import com.project.emi.eventscape.domain.postDetails.PostDetailsActivity;
+import com.project.emi.eventscape.domain.profile.AccountSettingsActivity;
 import com.project.emi.eventscape.domain.usersList.UsersListActivity;
 import com.project.emi.eventscape.domain.usersList.UsersListType;
 import com.project.emi.eventscape.enums.FollowState;
@@ -61,6 +65,7 @@ public class NewProfileActivity extends BaseActivity<ProfileView, ProfilePresent
     private ProgressBar progressBar;
     private TextView postsCounterTextView;
     private ProgressBar postsProgressBar;
+    private ImageView editButton;
 
     private FirebaseAuth mAuth;
     private GoogleApiClient mGoogleApiClient;
@@ -105,6 +110,16 @@ public class NewProfileActivity extends BaseActivity<ProfileView, ProfilePresent
         postsProgressBar = findViewById(R.id.postsProgressBar);
         followButton = findViewById(R.id.followButton);
         swipeContainer = findViewById(R.id.swipeContainer);
+        editButton = (ImageView)findViewById(R.id.editMenu);
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NewProfileActivity.this, AccountSettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         initListeners();
 
@@ -153,19 +168,19 @@ public class NewProfileActivity extends BaseActivity<ProfileView, ProfilePresent
 
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
-//               requestCode case CreatePostActivity.CREATE_NEW_POST_REQUEST:
-//                    postsAdapter.loadPosts();
-//                    showSnackBar(R.string.message_post_was_created);
-//                    setResult(RESULT_OK);
-//                    break;
+                case CreatePostActivity.CREATE_NEW_POST_REQUEST:
+                    postsAdapter.loadPosts();
+                    showSnackBar(R.string.message_post_was_created);
+                    setResult(RESULT_OK);
+                    break;
 
-//                case PostDetailsActivity.UPDATE_POST_REQUEST:
-//                    presenter.checkPostChanges(data);
-//                    break;
-//
-//                case LoginActivity.LOGIN_REQUEST_CODE:
-//                    presenter.checkFollowState(userID);
-//                    break;
+                case PostDetailsActivity.UPDATE_POST_REQUEST:
+                    presenter.checkPostChanges(data);
+                    break;
+
+                case LoginActivity.LOGIN_REQUEST_CODE:
+                    presenter.checkFollowState(userID);
+                    break;
             }
         }
     }

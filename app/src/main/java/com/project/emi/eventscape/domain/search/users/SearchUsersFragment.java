@@ -20,12 +20,16 @@ import com.project.emi.eventscape.R;
 import com.project.emi.eventscape.adapters.SearchUsersAdapter;
 import com.project.emi.eventscape.adapters.holders.UserViewHolder;
 import com.project.emi.eventscape.domain.base.BaseFragment;
+import com.project.emi.eventscape.domain.chat.chat.ChatActivity;
 import com.project.emi.eventscape.domain.newprofile.NewProfileActivity;
 import com.project.emi.eventscape.domain.profile.ProfileActivity;
 import com.project.emi.eventscape.domain.search.Searchable;
+import com.project.emi.eventscape.domain.usersList.UsersListActivity;
 import com.project.emi.eventscape.models.User;
 import com.project.emi.eventscape.util.AnimationUtils;
+import com.project.emi.eventscape.util.CodesUtil;
 import com.project.emi.eventscape.views.FollowButton;
+import com.project.emi.eventscape.views.MessageButton;
 
 import java.util.List;
 
@@ -83,6 +87,15 @@ public class SearchUsersFragment extends BaseFragment<SearchUsersView, SearchUse
                     User profile = usersAdapter.getItemByPosition(position);
                     presenter.onFollowButtonClick(followButton.getState(), ((User) profile).getUser_id());
                 }
+            }
+
+            @Override
+            public void onMessageButtonClick(int position, MessageButton messageButton) {
+                selectedItemPosition = position;
+                String userId = usersAdapter.getItemByPosition(position).getUser_id();
+                Intent intent = new Intent(getContext(), ChatActivity.class);
+                intent.putExtra(CodesUtil.RECIPIENT_ID, userId);
+                startActivity(intent);
             }
         });
 

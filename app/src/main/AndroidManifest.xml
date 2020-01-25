@@ -5,10 +5,11 @@
 
     <dist:module dist:instant="true" />
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".Application"
@@ -18,32 +19,43 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.project.emi.eventscape.MainActivity"/>
-        <activity android:name=".domain.notification.NotificationActivity"/>
-        <activity android:name=".domain.profile.ProfileActivity"/>
-        <activity android:name=".domain.search.SearchActivity"/>
-        <activity android:name="com.project.emi.eventscape.share.ShareActivity"/>
-        <activity android:name=".domain.profile.AccountSettingsActivity"/>
-        <activity android:name=".domain.login.LoginActivity"/>
-
-        <activity android:name=".domain.usersList.UsersListActivity"/>
-        <activity android:name=".domain.newprofile.NewProfileActivity"/>
-        <activity android:name=".domain.postDetails.PostDetailsActivity"/>
-        <activity android:name=".domain.post.createPost.CreatePostActivity"/>
-
-        <activity android:name=".domain.chat.chat.ChatActivity"/>
-        <activity android:name=".domain.chatmessage.DialogsActivity"/>
-
-        <activity android:name=".share.NextActivity"/>
-        <activity android:name=".domain.login.RegisterActivity"/>
-        <activity android:name="com.project.emi.eventscape.domain.home.HomeActivity">
+        <activity
+            android:name=".domain.post.videoPost.VideoPost"
+            android:label="@string/title_activity_video_post"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".domain.notification.NotificationActivity" />
+        <activity android:name=".domain.profile.ProfileActivity" />
+        <activity android:name=".domain.search.SearchActivity" />
+        <activity android:name=".share.ShareActivity" />
+        <activity android:name=".domain.profile.AccountSettingsActivity" />
+        <activity android:name=".domain.login.LoginActivity" />
+        <activity android:name=".domain.usersList.UsersListActivity" />
+        <activity android:name=".domain.newprofile.NewProfileActivity" />
+        <activity android:name=".domain.postDetails.PostDetailsActivity" />
+        <activity android:name=".domain.post.createPost.CreatePostActivity" />
+        <activity android:name=".domain.chat.chat.ChatActivity" />
+        <activity android:name=".share.NextActivity" />
+        <activity android:name=".domain.login.RegisterActivity" />
+        <activity android:name=".domain.home.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name=".core.trackers.DemoDownloadService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.exoplayer.downloadService.action.RESTART"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </service>
+
+        <service android:name="com.google.android.exoplayer2.scheduler.PlatformScheduler$PlatformSchedulerService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="true"/>
     </application>
 
 </manifest>

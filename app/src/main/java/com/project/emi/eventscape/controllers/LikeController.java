@@ -1,5 +1,3 @@
-
-
 package com.project.emi.eventscape.controllers;
 
 import android.animation.Animator;
@@ -13,7 +11,6 @@ import android.graphics.PorterDuff;
 import android.view.animation.BounceInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.google.android.material.snackbar.Snackbar;
 import com.project.emi.eventscape.R;
 import com.project.emi.eventscape.core.interactors.PostInteractor;
@@ -21,9 +18,7 @@ import com.project.emi.eventscape.core.managers.PostManager;
 import com.project.emi.eventscape.core.managers.listeners.OnObjectExistListener;
 import com.project.emi.eventscape.core.managers.listeners.OnPostChangedListener;
 import com.project.emi.eventscape.domain.base.BaseActivity;
-import com.project.emi.eventscape.domain.home.HomeActivity;
 import com.project.emi.eventscape.models.Post;
-
 
 public class LikeController {
 

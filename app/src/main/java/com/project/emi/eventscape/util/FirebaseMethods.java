@@ -116,31 +116,7 @@ public class FirebaseMethods {
 
     }
 
-//    public boolean checkIfUsernameExists(String username, DataSnapshot datasnapshot){
-//        Log.d(TAG, "checkIfUsernameExists: checking if " + username + " already exists.");
-//
-//        User user = new User();
-//
-//        for (DataSnapshot ds: datasnapshot.child(userID).getChildren()){
-//            Log.d(TAG, "checkIfUsernameExists: datasnapshot: " + ds);
-//
-//            user.setUsername(ds.getValue(User.class).getUsername());
-//            Log.d(TAG, "checkIfUsernameExists: username: " + user.getUsername());
-//
-//            if(StringManipulation.expandUsername(user.getUsername()).equals(username)){
-//                Log.d(TAG, "checkIfUsernameExists: FOUND A MATCH: " + user.getUsername());
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
 
-    /**
-     * Register a new email and password to Firebase Authentication
-     * @param email
-     * @param password
-     * @param username
-     */
     public void registerNewEmail(final String email, String password, final String username){
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -186,15 +162,6 @@ public class FirebaseMethods {
         }
     }
 
-    /**
-     * Add information to the users nodes
-     * Add information to the user_account_settings node
-     * @param email
-     * @param username
-     * @param description
-     * @param website
-     * @param profile_photo
-     */
     public void addNewUser(String email, String username, String description, String website, String profile_photo){
 
         User user = new User( userID,  1,  email,  StringManipulation.condenseUsername(username) );

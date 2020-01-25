@@ -29,6 +29,16 @@
         android:textAppearance="@style/TextAppearance.Title"
         tools:text="Barbie Koduzi" />
 
+    <com.project.emi.eventscape.views.MessageButton
+        android:id="@+id/messageButton"
+        style="@style/FollowButton"
+        android:layout_width="90dp"
+        android:visibility="invisible"
+        android:layout_marginEnd="10dp"
+        tools:text="Message" />
+
+
+
     <com.project.emi.eventscape.views.FollowButton
         android:id="@+id/followButton"
         style="@style/FollowButton"

@@ -51,14 +51,8 @@ public class BottomNavigationViewHelper {
                             context.startActivity(intent_c);
                         }
                         break;
-                    case R.id.ic_alert:
-                        if(currentIndex!=3) {
-                            Intent intent_a = new Intent(context, NotificationActivity.class);
-                            context.startActivity(intent_a);
-                        }
-                        break;
                     case R.id.ic_android:
-                        if(currentIndex!=4) {
+                        if(currentIndex!=3) {
                             Intent intent_p = new Intent(context, NewProfileActivity.class);
                             intent_p.putExtra(ProfileActivity.USER_ID_EXTRA_KEY, PreferencesUtil.getUserUid(context));
                             context.startActivity(intent_p);

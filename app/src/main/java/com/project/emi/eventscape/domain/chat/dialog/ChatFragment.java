@@ -109,6 +109,7 @@ public class ChatFragment extends DemoDialogsFragment
     private void generateDialogFromSnapSht(DataSnapshot dataSnapshot) {
         String dialogId = dataSnapshot.getKey();
         String recipientId = dataSnapshot.child("users").getValue().toString().replace(";", "").replace(userId, "");
+        dialogsAdapter.clear();
         DatabaseHelper.getInstance(getContext()).getDatabaseReference().child("users").child(recipientId.trim()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot userSnapShot) {
@@ -119,8 +120,11 @@ public class ChatFragment extends DemoDialogsFragment
                     public void onDataChange(@NonNull DataSnapshot messageSnapShot) {
                         for (DataSnapshot messageSnap : messageSnapShot.getChildren()) {
                             Message message = messageSnap.getValue(Message.class);
-                            message.setCreatedDate(new Date(message.getTime()));
-
+                            if(message.getTime()>10000){
+                                message.setCreatedDate(new Date(message.getTime()));
+                            } else {
+                                message.setCreatedDate(new Date());
+                            }
                             String authorId = message.getAuthorId();
                             DatabaseHelper.getInstance(getContext()).getDatabaseReference().child("users").child(recipientId.trim()).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
@@ -147,7 +151,6 @@ public class ChatFragment extends DemoDialogsFragment
                 dialog.setId(dialogId);
                 dialog.setDialogPhoto(user.getPhotoUrl());
                 dialog.setDialogName(user.getUsername());
-                dialog.setUnreadCount(3);
                 dialog.addUser(user);
             }
 

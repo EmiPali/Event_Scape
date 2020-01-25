@@ -28,6 +28,7 @@ public class Dialog implements IDialog<Message> {
     }
 
     public Dialog() {
+        unreadCount = 0;
     }
 
     @Override

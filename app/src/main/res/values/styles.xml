@@ -56,5 +56,22 @@
         <item name="android:textColor">@color/highlight_text</item>
     </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="PlayerTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@android:color/black</item>
+    </style>
+
+    <style name="PlayerTheme.Spherical">
+
+    </style>
+
 
 </resources>

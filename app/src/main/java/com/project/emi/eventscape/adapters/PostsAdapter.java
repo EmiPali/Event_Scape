@@ -95,7 +95,7 @@ public class PostsAdapter extends BaseFragmentPostsAdapter {
             @Override
             public void onLikeClick(LikeController likeController, int position) {
                 Post post = getItemByPosition(position);
-                //likeController.handleLikeClickAction(fragment.getActivity(), post);
+                likeController.handleLikeClickAction((BaseActivity) fragment.getActivity(), post);
             }
 
             @Override

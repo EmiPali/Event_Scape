@@ -50,17 +50,4 @@ public class MySharedPref {
         return null;
     }
 
-    public void deleteSharedPreference(String userName, String password){
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(ctx);
-        editor = sharedPreferences.edit();
-        editor.clear();
-        editor.commit();
-
-        if(password!=null || userName!=null){
-            saveStringInSharedPref(CodesUtil.DRIVER_USERNAME, userName);
-            saveStringInSharedPref(CodesUtil.DRIVER_PASSWORD, password);
-        }
-    }
-
 }

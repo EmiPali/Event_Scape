@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,11 +44,12 @@ public class BaseChatActivity extends AppCompatActivity implements MessagesListA
     protected Menu menu;
     protected String RECIPIENT_ID;
     private String USER_ID;
-    private User user;
+    protected User user;
     private User recipient;
     private int selectionCount;
     private Date lastLoadedDate;
     private ActionBar actionBar;
+    protected Toolbar toolbar;
 
 
     @Override
@@ -68,7 +70,6 @@ public class BaseChatActivity extends AppCompatActivity implements MessagesListA
     @Override
     protected void onStart() {
         super.onStart();
-        loadMessagesFirebaseNoQuery(USER_ID, CHAT_ID);
     }
 
     protected void fetchUsers() {
@@ -88,6 +89,7 @@ public class BaseChatActivity extends AppCompatActivity implements MessagesListA
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 recipient = dataSnapshot.getValue(User.class);
+                toolbar.setTitle(recipient.getUsername());
             }
 
             @Override
@@ -145,7 +147,6 @@ public class BaseChatActivity extends AppCompatActivity implements MessagesListA
 
 
     protected void loadMessagesFirebaseNoQuery(final String userId, final String chatId) {
-        //setSeenMessages(userId, chatId);
         ChatHelper.dialogsReference.child(chatId).child("messages").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -158,9 +159,9 @@ public class BaseChatActivity extends AppCompatActivity implements MessagesListA
                     String text = dataSnap.child("text").getValue().toString();
                     String id = dataSnap.child("authorId").getValue().toString();
                     if (id.equals(userId)) {
-                        result.add(new Message(id, user, text, user.getName(), new Date(time)));
+                        result.add(new Message(id, user, text, user.getName(),time!=null? new Date(time): new Date()));
                     } else {
-                        result.add(new Message(id, recipient, text, recipient.getName(), new Date(time)));
+                        result.add(new Message(id, recipient, text, recipient.getName(), time!=null? new Date(time): new Date()));
                     }
                 }
                 if(messagesAdapter.getItemCount()>0 && result.size()>0){

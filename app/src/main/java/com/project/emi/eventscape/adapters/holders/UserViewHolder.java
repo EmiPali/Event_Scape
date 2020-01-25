@@ -20,6 +20,7 @@ import com.project.emi.eventscape.models.User;
 import com.project.emi.eventscape.util.GlideApp;
 import com.project.emi.eventscape.util.ImageUtil;
 import com.project.emi.eventscape.views.FollowButton;
+import com.project.emi.eventscape.views.MessageButton;
 
 
 public class UserViewHolder extends RecyclerView.ViewHolder {
@@ -29,6 +30,8 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
     private ImageView photoImageView;
     private TextView nameTextView;
     private FollowButton followButton;
+
+    private MessageButton messageButton;
 
     private ProfileManager profileManager;
 
@@ -43,6 +46,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
         nameTextView = view.findViewById(R.id.nameTextView);
         photoImageView = view.findViewById(R.id.photoImageView);
         followButton = view.findViewById(R.id.followButton);
+        messageButton = view.findViewById(R.id.messageButton);
 
         view.setOnClickListener(v -> {
             int position = getAdapterPosition();
@@ -54,6 +58,12 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
         followButton.setOnClickListener(v -> {
             if (callback != null) {
                 callback.onFollowButtonClick(getAdapterPosition(), followButton);
+            }
+        });
+
+        messageButton.setOnClickListener(v->{
+            if(callback!=null){
+                callback.onMessageButtonClick(getAdapterPosition(), messageButton);
             }
         });
     }
@@ -78,6 +88,8 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
     protected void fillInProfileFields(User profile) {
         nameTextView.setText(profile.getUsername());
         followButton.setVisibility(View.VISIBLE);
+        messageButton.setVisibility(View.VISIBLE);
+        messageButton.setState(FollowState.NO_ONE_FOLLOW);
         followButton.setState(FollowState.NO_ONE_FOLLOW);
         String currentUserId = FirebaseAuth.getInstance().getUid();
         if (currentUserId != null) {
@@ -87,10 +99,13 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
                     followButton.setState(followState);
                 });
             } else {
+                messageButton.setState(FollowState.MY_PROFILE);
                 followButton.setState(FollowState.MY_PROFILE);
             }
         } else {
+            messageButton.setState(FollowState.NO_ONE_FOLLOW);
             followButton.setState(FollowState.NO_ONE_FOLLOW);
+
         }
 
         if (profile.getPhotoUrl() != null) {
@@ -102,6 +117,8 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
         void onItemClick(int position, View view);
 
         void onFollowButtonClick(int position, FollowButton followButton);
+
+        void onMessageButtonClick(int position, MessageButton messageButton);
     }
 
 }

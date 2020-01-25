@@ -37,8 +37,11 @@ import com.project.emi.eventscape.R;
 import com.project.emi.eventscape.adapters.UsersAdapter;
 import com.project.emi.eventscape.adapters.holders.UserViewHolder;
 import com.project.emi.eventscape.domain.base.BaseActivity;
+import com.project.emi.eventscape.domain.chat.chat.ChatActivity;
 import com.project.emi.eventscape.domain.newprofile.NewProfileActivity;
+import com.project.emi.eventscape.util.CodesUtil;
 import com.project.emi.eventscape.views.FollowButton;
+import com.project.emi.eventscape.views.MessageButton;
 
 import java.util.List;
 
@@ -128,6 +131,15 @@ public class UsersListActivity extends BaseActivity<UsersListView, UsersListPres
                 selectedItemPosition = position;
                 String userId = usersAdapter.getItemByPosition(position);
                 presenter.onFollowButtonClick(followButton.getState(), userId);
+            }
+
+            @Override
+            public void onMessageButtonClick(int position, MessageButton messageButton) {
+                selectedItemPosition = position;
+                String userId = usersAdapter.getItemByPosition(position);
+                Intent intent = new Intent(UsersListActivity.this, ChatActivity.class);
+                intent.putExtra(CodesUtil.RECIPIENT_ID, userId);
+                startActivity(intent);
             }
         });
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(),

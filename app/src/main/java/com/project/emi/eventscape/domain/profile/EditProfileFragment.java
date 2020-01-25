@@ -29,10 +29,12 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.project.emi.eventscape.R;
 import com.project.emi.eventscape.core.dialogs.ConfirmPasswordDialog;
+import com.project.emi.eventscape.core.managers.DatabaseHelper;
 import com.project.emi.eventscape.models.User;
 import com.project.emi.eventscape.models.UserAccountSettings;
 import com.project.emi.eventscape.models.UserSettings;
 import com.project.emi.eventscape.util.FirebaseMethods;
+import com.project.emi.eventscape.util.PreferencesUtil;
 import com.project.emi.eventscape.util.UniversalImageLoader;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -120,6 +122,7 @@ public class EditProfileFragment extends Fragment implements
     private EditText mDisplayName, mUsername, mWebsite, mDescription, mEmail, mPhoneNumber;
     private TextView mChangeProfilePhoto;
     private CircleImageView mProfilePhoto;
+    private User user;
 
 
     //vars
@@ -140,6 +143,18 @@ public class EditProfileFragment extends Fragment implements
         mChangeProfilePhoto = (TextView) view.findViewById(R.id.changeProfilePhoto);
         mFirebaseMethods = new FirebaseMethods(getActivity());
 
+        userID = PreferencesUtil.getUserUid(getContext());
+        DatabaseHelper.getInstance(getContext()).getDatabaseReference().child("users").child(userID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                user = dataSnapshot.getValue(User.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         //setProfileImage();
         setupFirebaseAuth();
@@ -162,6 +177,8 @@ public class EditProfileFragment extends Fragment implements
                 saveProfileSettings();
             }
         });
+
+
 
         return view;
     }
@@ -262,14 +279,10 @@ public class EditProfileFragment extends Fragment implements
     }
 
     private void setProfileWidgets(UserSettings userSettings){
-        Log.d(TAG, "setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.toString());
-        Log.d(TAG, "setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.getUser().getEmail());
-        Log.d(TAG, "setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.getUser().getPhone_number());
-
         mUserSettings = userSettings;
         //User user = userSettings.getUser();
         UserAccountSettings settings = userSettings.getSettings();
-        UniversalImageLoader.setImage(settings.getProfile_photo(), mProfilePhoto, null, "");
+        UniversalImageLoader.setImage(user.getPhotoUrl(), mProfilePhoto, null, "");
         mDisplayName.setText(settings.getDisplay_name());
         mUsername.setText(settings.getUsername());
         mWebsite.setText(settings.getWebsite());

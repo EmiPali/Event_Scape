@@ -15,7 +15,6 @@ public class Comment {
     private String authorId;
     private long createdDate;
 
-
     public Comment() {
         // Default constructor required for calls to DataSnapshot.getValue(Comment.class)
     }

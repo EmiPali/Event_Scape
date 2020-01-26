@@ -103,34 +103,34 @@ public abstract class PickImageActivity<V extends PickImageView, P extends PickI
             requestPermissions(new String[]{Manifest.permission.CAMERA}, CropImage.CAMERA_CAPTURE_PERMISSIONS_REQUEST_CODE);
         } else {
             //CropImage.startPickImageActivity(this);
-            showAlert(MediaPicker.MediaTypes.VIDEO);
+            showAlert();
         }
     }
 
-    private void showAlert(int fileType){
+    private void showAlert(){
 
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setView(R.layout.dialog_view)
                 .create();
 
         alertDialog.show();
-        Button singleButton = (Button) alertDialog.findViewById(R.id.activity_home_single_select);
+        Button pictureButton = (Button) alertDialog.findViewById(R.id.activity_picture_select);
 
-        singleButton.setOnClickListener(new View.OnClickListener() {
+        pictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
-                startMediaPicker(fileType,false);
+                startMediaPicker(MediaPicker.MediaTypes.IMAGE,false);
             }
         });
 
-        Button multiButton = (Button) alertDialog.findViewById(R.id.activity_home_multi_select);
+        Button videoButton = (Button) alertDialog.findViewById(R.id.activity_videoo_select);
 
-        multiButton.setOnClickListener(new View.OnClickListener() {
+        videoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
-                startMediaPicker(fileType,true);
+                startMediaPicker(MediaPicker.MediaTypes.VIDEO,false);
             }
         });
 

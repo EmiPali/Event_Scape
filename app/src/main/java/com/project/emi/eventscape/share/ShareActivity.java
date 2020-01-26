@@ -1,6 +1,7 @@
 package com.project.emi.eventscape.share;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.project.emi.eventscape.R;
+import com.project.emi.eventscape.domain.post.createPost.CreatePostActivity;
 import com.project.emi.eventscape.util.BottomNavigationViewHelper;
 import com.project.emi.eventscape.util.Permissions;
 import com.project.emi.eventscape.adapters.SectionsPagerAdapter;
@@ -32,12 +34,15 @@ public class ShareActivity extends AppCompatActivity {
         setContentView(R.layout.activity_share);
         Log.d(TAG, "onCreate: started");
 
-        if (checkPermissionsArray(Permissions.PERMISSIONS)){
-            setUpViewPager();
-        }
-        else{
-            verifyPermissions(Permissions.PERMISSIONS);
-        }
+//        if (checkPermissionsArray(Permissions.PERMISSIONS)){
+//            setUpViewPager();
+//        }
+//        else{
+//            verifyPermissions(Permissions.PERMISSIONS);
+//        }
+
+        Intent intent = new Intent(this, CreatePostActivity.class);
+        startActivityForResult(intent, CreatePostActivity.CREATE_NEW_POST_REQUEST);
 
 
         //setupBottomNavigationView();
@@ -61,24 +66,24 @@ public class ShareActivity extends AppCompatActivity {
         tabLayout.getTabAt(0).setText(getString(R.string.gallery));
         tabLayout.getTabAt(1).setText(getString(R.string.photo));
     }
-
-
-    public void verifyPermissions (String[] permissions){
-        Log.d(TAG,"verifyPermissions : verifying permissions");
-        ActivityCompat.requestPermissions(
-                ShareActivity.this,
-                permissions,
-                VERIFY_PERMISSIONS_REQUEST
-        );
-    }
-
-    /**
-     * Check an array of permissions
-     * @param permissions
-     * @return
-     */
-
-
+//
+//
+//    public void verifyPermissions (String[] permissions){
+//        Log.d(TAG,"verifyPermissions : verifying permissions");
+//        ActivityCompat.requestPermissions(
+//                ShareActivity.this,
+//                permissions,
+//                VERIFY_PERMISSIONS_REQUEST
+//        );
+//    }
+//
+//    /**
+//     * Check an array of permissions
+//     * @param permissions
+//     * @return
+//     */
+//
+//
     public boolean checkPermissionsArray(String[] permissions)
     {
         Log.d(TAG,"checkPermissionsArray: checking permissions array.");
@@ -89,14 +94,14 @@ public class ShareActivity extends AppCompatActivity {
             }
         }return true;
     }
-
-    /**
-     * Check a single permission is it has been verified
-     * @param permission
-     * @return
-     */
-
-
+//
+//    /**
+//     * Check a single permission is it has been verified
+//     * @param permission
+//     * @return
+//     */
+//
+//
     public boolean checkPermissions(String permission)
     {
         Log.d(TAG,"checkPermissions: checking permission:" + permission);

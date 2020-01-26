@@ -26,22 +26,22 @@
         android:weightSum="2">
 
         <Button
-            android:id="@+id/activity_home_single_select"
+            android:id="@+id/activity_picture_select"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Single"
+            android:text="Picture"
             android:textSize="16sp"
             android:layout_margin="@dimen/offset_4"
             android:textAppearance="@style/App.TextAppearance.h4.Title"
    />
 
         <Button
-            android:id="@+id/activity_home_multi_select"
+            android:id="@+id/activity_videoo_select"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Multiple"
+            android:text="Video"
             android:textSize="16sp"
             android:layout_margin="@dimen/offset_4"
             android:textAppearance="@style/App.TextAppearance.h4.Title"

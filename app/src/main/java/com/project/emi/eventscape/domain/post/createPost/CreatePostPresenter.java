@@ -5,6 +5,7 @@ import android.content.Context;
 import com.google.firebase.auth.FirebaseAuth;
 import com.project.emi.eventscape.R;
 import com.project.emi.eventscape.domain.post.BaseCreatePostPresenter;
+import com.project.emi.eventscape.enums.ItemType;
 import com.project.emi.eventscape.models.Post;
 
 public class CreatePostPresenter extends BaseCreatePostPresenter<CreatePostView> {
@@ -26,6 +27,7 @@ public class CreatePostPresenter extends BaseCreatePostPresenter<CreatePostView>
             post.setTitle(title);
             post.setDescription(description);
             post.setAuthorId(FirebaseAuth.getInstance().getCurrentUser().getUid());
+            post.setItemType(ItemType.ITEM);
             postManager.createOrUpdatePostWithImage(view.getImageUri(), this, post);
         });
     }

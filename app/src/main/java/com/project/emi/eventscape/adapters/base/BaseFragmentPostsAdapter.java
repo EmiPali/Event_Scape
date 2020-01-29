@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.project.emi.eventscape.core.managers.PostManager;
 import com.project.emi.eventscape.core.managers.listeners.OnPostChangedListener;
 import com.project.emi.eventscape.domain.base.BaseFragment;
+import com.project.emi.eventscape.enums.ItemType;
 import com.project.emi.eventscape.models.Post;
 import com.project.emi.eventscape.util.LogUtil;
 
@@ -33,7 +34,7 @@ public abstract class BaseFragmentPostsAdapter extends RecyclerView.Adapter<Recy
 
     @Override
     public int getItemViewType(int position) {
-        return postList.get(position).getItemType().getTypeCode();
+        return postList.get(position).getItemType()!=null?postList.get(position).getItemType().getTypeCode(): ItemType.ITEM.getTypeCode();
     }
 
     protected Post getItemByPosition(int position) {

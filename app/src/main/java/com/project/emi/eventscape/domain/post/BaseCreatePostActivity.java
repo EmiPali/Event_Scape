@@ -39,6 +39,7 @@ public abstract class BaseCreatePostActivity<V extends BaseCreatePostView, P ext
     protected EditText titleEditText;
     protected EditText descriptionEditText;
     protected EditText textHolder;
+    protected TextInputLayout textInputLayout;
     protected Button postButton;
     private boolean isText = false;
 
@@ -57,6 +58,7 @@ public abstract class BaseCreatePostActivity<V extends BaseCreatePostView, P ext
         postButton = findViewById(R.id.createPost);
         textHolder = findViewById(R.id.textHolder);
         imageView = findViewById(R.id.imageView);
+        textInputLayout = findViewById(R.id.textHolderLayout);
         imageView.setOnClickListener(v -> onSelectImageClick(v));
 
         if (getIntent().getStringExtra(CodesUtil.EVENT_TYPE) != null && getIntent().getStringExtra(CodesUtil.EVENT_TYPE).equals("TEXT")) {
@@ -65,15 +67,15 @@ public abstract class BaseCreatePostActivity<V extends BaseCreatePostView, P ext
             isText = false;
         }
 
-
         if (isText) {
+            textInputLayout.setVisibility(View.VISIBLE);
             imageView.setVisibility(View.GONE);
             textHolder.setVisibility(View.VISIBLE);
         } else {
+            textInputLayout.setVisibility(View.GONE);
             imageView.setVisibility(View.VISIBLE);
             textHolder.setVisibility(View.GONE);
         }
-
 
         titleEditText.setOnTouchListener((v, event) -> {
             if (titleEditText.hasFocus() && titleEditText.getError() != null) {

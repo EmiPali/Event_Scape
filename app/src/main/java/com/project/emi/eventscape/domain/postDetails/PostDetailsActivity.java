@@ -43,6 +43,7 @@ import com.project.emi.eventscape.core.managers.PostManager;
 import com.project.emi.eventscape.domain.base.BaseActivity;
 import com.project.emi.eventscape.domain.newprofile.NewProfileActivity;
 import com.project.emi.eventscape.domain.post.videoPost.VideoPost;
+import com.project.emi.eventscape.enums.EventType;
 import com.project.emi.eventscape.enums.PostStatus;
 import com.project.emi.eventscape.models.Comment;
 import com.project.emi.eventscape.models.Post;
@@ -314,11 +315,15 @@ public class PostDetailsActivity extends BaseActivity<PostDetailsView, PostDetai
     }
 
     @Override
-    public void openImageDetailScreen(String imageTitle) {
-        Intent intent = new Intent(this, VideoPost.class);
-
-       // intent.putExtra(ImageDetailActivity.IMAGE_TITLE_EXTRA_KEY, imageTitle);
-        startActivity(intent);
+    public void openImageDetailScreen(String imageTitle, EventType eventType) {
+        if(eventType!=null && eventType.equals(EventType.VIDEO)){
+            Intent intent = new Intent(this, VideoPost.class);
+            startActivity(intent);
+        } else {
+//            Intent intent = new Intent(this, VideoPost.class);
+//            intent.putExtra(ImageDetailActivity.IMAGE_TITLE_EXTRA_KEY, imageTitle);
+//            startActivity(intent);
+        }
     }
 
     @Override

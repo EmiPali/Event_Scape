@@ -19,7 +19,9 @@ import com.google.android.material.tabs.TabLayout;
 import com.greentoad.turtlebody.mediapicker.MediaPicker;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.project.emi.eventscape.R;
+import com.project.emi.eventscape.domain.newprofile.NewProfileActivity;
 import com.project.emi.eventscape.domain.post.createPost.CreatePostActivity;
+import com.project.emi.eventscape.domain.postDetails.PostDetailsActivity;
 import com.project.emi.eventscape.util.BottomNavigationViewHelper;
 import com.project.emi.eventscape.util.CodesUtil;
 import com.project.emi.eventscape.util.Permissions;
@@ -101,6 +103,14 @@ public class ShareActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+          onNavigateUp();
+        }
     }
 
 

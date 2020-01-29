@@ -2,6 +2,7 @@ package com.project.emi.eventscape.domain.home;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -28,7 +30,9 @@ import com.project.emi.eventscape.domain.newprofile.NewProfileActivity;
 import com.project.emi.eventscape.domain.post.createPost.CreatePostActivity;
 import com.project.emi.eventscape.domain.postDetails.PostDetailsActivity;
 import com.project.emi.eventscape.models.Post;
+import com.project.emi.eventscape.share.ShareActivity;
 import com.project.emi.eventscape.util.AnimationUtils;
+import com.project.emi.eventscape.util.CodesUtil;
 
 import java.util.Objects;
 
@@ -135,8 +139,40 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
 
     @Override
     public void openCreatePostActivity() {
-        Intent intent = new Intent(getActivity(), CreatePostActivity.class);
-        startActivityForResult(intent, CreatePostActivity.CREATE_NEW_POST_REQUEST);
+       showAlert();
+    }
+
+    private void showAlert(){
+
+        AlertDialog alertDialog = new AlertDialog.Builder(getContext())
+                .setView(R.layout.post_type_dialog)
+                .create();
+
+        alertDialog.show();
+        Button pictureButton = (Button) alertDialog.findViewById(R.id.activity_picture_select);
+
+        pictureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+                Intent intent = new Intent(getContext(), CreatePostActivity.class);
+                intent.putExtra(CodesUtil.EVENT_TYPE, "TEXT");
+                startActivityForResult(intent, CreatePostActivity.CREATE_NEW_POST_REQUEST);
+            }
+        });
+
+        Button videoButton = (Button) alertDialog.findViewById(R.id.activity_videoo_select);
+
+        videoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+                Intent intent = new Intent(getContext(), CreatePostActivity.class);
+                intent.putExtra(CodesUtil.EVENT_TYPE, "NO_TEXT");
+                startActivityForResult(intent, CreatePostActivity.CREATE_NEW_POST_REQUEST);
+            }
+        });
+
     }
 
 

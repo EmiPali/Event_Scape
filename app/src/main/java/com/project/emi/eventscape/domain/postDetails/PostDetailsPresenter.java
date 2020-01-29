@@ -267,7 +267,7 @@ class PostDetailsPresenter extends BasePresenter<PostDetailsView> {
     public void onPostImageClick() {
         ifViewAttached(view -> {
             if (post != null && post.getTitle() != null) {
-                view.openImageDetailScreen(post.getImageTitle());
+                view.openImageDetailScreen(post.getImageTitle(), post.getEventType());
             }
         });
     }

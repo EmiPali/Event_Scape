@@ -4,6 +4,7 @@ import android.view.View;
 
 
 import com.project.emi.eventscape.domain.base.BaseView;
+import com.project.emi.eventscape.enums.EventType;
 import com.project.emi.eventscape.models.Comment;
 import com.project.emi.eventscape.models.Post;
 
@@ -15,7 +16,7 @@ public interface PostDetailsView extends BaseView {
 
     void onPostRemoved();
 
-    void openImageDetailScreen(String imagePath);
+    void openImageDetailScreen(String imagePath, EventType eventType);
 
     void openProfileActivity(String authorId, View authorView);
 

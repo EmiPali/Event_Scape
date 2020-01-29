@@ -25,8 +25,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.project.emi.eventscape.R;
 import com.project.emi.eventscape.domain.pickImageBase.PickImageActivity;
+import com.project.emi.eventscape.util.CodesUtil;
 
 
 public abstract class BaseCreatePostActivity<V extends BaseCreatePostView, P extends BaseCreatePostPresenter<V>>
@@ -36,7 +38,9 @@ public abstract class BaseCreatePostActivity<V extends BaseCreatePostView, P ext
     protected ProgressBar progressBar;
     protected EditText titleEditText;
     protected EditText descriptionEditText;
+    protected EditText textHolder;
     protected Button postButton;
+    private boolean isText = false;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -51,10 +55,25 @@ public abstract class BaseCreatePostActivity<V extends BaseCreatePostView, P ext
         descriptionEditText = findViewById(R.id.descriptionEditText);
         progressBar = findViewById(R.id.progressBar);
         postButton = findViewById(R.id.createPost);
-
+        textHolder = findViewById(R.id.textHolder);
         imageView = findViewById(R.id.imageView);
-
         imageView.setOnClickListener(v -> onSelectImageClick(v));
+
+        if (getIntent().getStringExtra(CodesUtil.EVENT_TYPE) != null && getIntent().getStringExtra(CodesUtil.EVENT_TYPE).equals("TEXT")) {
+            isText = true;
+        } else {
+            isText = false;
+        }
+
+
+        if (isText) {
+            imageView.setVisibility(View.GONE);
+            textHolder.setVisibility(View.VISIBLE);
+        } else {
+            imageView.setVisibility(View.VISIBLE);
+            textHolder.setVisibility(View.GONE);
+        }
+
 
         titleEditText.setOnTouchListener((v, event) -> {
             if (titleEditText.hasFocus() && titleEditText.getError() != null) {

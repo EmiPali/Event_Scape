@@ -27,6 +27,22 @@
                 android:focusableInTouchMode="true"
                 android:focusable="true" />
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/textHolderLayout"
+                android:focusableInTouchMode="true"
+                android:visibility="invisible"
+                android:focusable="true">
+                <EditText
+                    android:id="@+id/textHolder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_title"
+                    android:inputType="textMultiLine" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
             <ProgressBar
                 android:id="@+id/progressBar"
                 style="?android:attr/progressBarStyleLarge"

@@ -1,5 +1,6 @@
 package com.project.emi.eventscape.share;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -7,16 +8,20 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.greentoad.turtlebody.mediapicker.MediaPicker;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.project.emi.eventscape.R;
 import com.project.emi.eventscape.domain.post.createPost.CreatePostActivity;
 import com.project.emi.eventscape.util.BottomNavigationViewHelper;
+import com.project.emi.eventscape.util.CodesUtil;
 import com.project.emi.eventscape.util.Permissions;
 import com.project.emi.eventscape.adapters.SectionsPagerAdapter;
 
@@ -41,9 +46,7 @@ public class ShareActivity extends AppCompatActivity {
 //            verifyPermissions(Permissions.PERMISSIONS);
 //        }
 
-        Intent intent = new Intent(this, CreatePostActivity.class);
-        startActivityForResult(intent, CreatePostActivity.CREATE_NEW_POST_REQUEST);
-
+        showAlert();
 
         //setupBottomNavigationView();
 
@@ -66,6 +69,41 @@ public class ShareActivity extends AppCompatActivity {
         tabLayout.getTabAt(0).setText(getString(R.string.gallery));
         tabLayout.getTabAt(1).setText(getString(R.string.photo));
     }
+
+    private void showAlert(){
+
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setView(R.layout.post_type_dialog)
+                .create();
+
+        alertDialog.show();
+        Button pictureButton = (Button) alertDialog.findViewById(R.id.activity_picture_select);
+
+        pictureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+                Intent intent = new Intent(ShareActivity.this, CreatePostActivity.class);
+                intent.putExtra(CodesUtil.EVENT_TYPE, "TEXT");
+                startActivityForResult(intent, CreatePostActivity.CREATE_NEW_POST_REQUEST);
+            }
+        });
+
+        Button videoButton = (Button) alertDialog.findViewById(R.id.activity_videoo_select);
+
+        videoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+                Intent intent = new Intent(ShareActivity.this, CreatePostActivity.class);
+                intent.putExtra(CodesUtil.EVENT_TYPE, "NO_TEXT");
+                startActivityForResult(intent, CreatePostActivity.CREATE_NEW_POST_REQUEST);
+            }
+        });
+
+    }
+
+
 //
 //
 //    public void verifyPermissions (String[] permissions){

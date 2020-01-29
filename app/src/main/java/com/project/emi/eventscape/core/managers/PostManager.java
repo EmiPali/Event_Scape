@@ -32,6 +32,7 @@ import com.bumptech.glide.request.target.Target;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 import com.project.emi.eventscape.R;
+import com.project.emi.eventscape.core.interactors.FollowInteractor;
 import com.project.emi.eventscape.core.interactors.PostInteractor;
 import com.project.emi.eventscape.core.managers.listeners.OnDataChangedListener;
 import com.project.emi.eventscape.core.managers.listeners.OnObjectExistListener;
@@ -153,7 +154,7 @@ public class PostManager extends FirebaseListenersManager {
     }
 
     public void getFollowingPosts(String userId, OnDataChangedListener<FollowingPost> listener) {
-       // FollowInteractor.getInstance(context).getFollowingPosts(userId, listener);
+        FollowInteractor.getInstance(context).getFollowingPosts(userId, listener);
     }
 
     public void searchByTitle(String searchText, OnDataChangedListener<Post> onDataChangedListener) {

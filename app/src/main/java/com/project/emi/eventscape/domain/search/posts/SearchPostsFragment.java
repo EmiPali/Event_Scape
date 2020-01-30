@@ -44,9 +44,11 @@ import com.project.emi.eventscape.domain.newprofile.NewProfileActivity;
 import com.project.emi.eventscape.domain.postDetails.PostDetailsActivity;
 import com.project.emi.eventscape.domain.profile.ProfileActivity;
 import com.project.emi.eventscape.domain.search.Searchable;
+import com.project.emi.eventscape.enums.ItemType;
 import com.project.emi.eventscape.enums.PostStatus;
 import com.project.emi.eventscape.models.Post;
 import com.project.emi.eventscape.util.AnimationUtils;
+import com.project.emi.eventscape.util.CodesUtil;
 
 import java.util.List;
 
@@ -174,8 +176,8 @@ public class SearchPostsFragment extends BaseFragment<SearchPostsView, SearchPos
         Intent intent = new Intent(getActivity(), PostDetailsActivity.class);
         intent.putExtra(PostDetailsActivity.POST_ID_EXTRA_KEY, post.getId());
         intent.putExtra(PostDetailsActivity.AUTHOR_ANIMATION_NEEDED_EXTRA_KEY, true);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        intent.putExtra(CodesUtil.EVENT_TYPE, post.getItemType().equals(ItemType.TEXT)? "TEXT": "VIDEO_IMAGE");
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && v.findViewById(R.id.postImageView)!=null ) {
 
             View imageView = v.findViewById(R.id.postImageView);
 

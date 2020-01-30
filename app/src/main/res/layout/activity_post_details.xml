@@ -35,6 +35,12 @@
                     android:layout_centerInParent="true"
                     android:visibility="visible" />
 
+                <TextView
+                    android:padding="50dp"
+                    android:id="@+id/txtContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
                 <ImageView
                     android:id="@+id/postImageView"
                     android:layout_width="match_parent"

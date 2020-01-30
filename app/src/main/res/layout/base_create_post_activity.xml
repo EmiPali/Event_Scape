@@ -37,8 +37,8 @@
                 <EditText
                     android:id="@+id/textHolder"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/hint_title"
+                    android:layout_height="match_parent"
+                    android:hint="What is on yor mind ?"
                     android:inputType="textMultiLine" />
 
             </com.google.android.material.textfield.TextInputLayout>

@@ -59,4 +59,6 @@ public interface PostDetailsView extends BaseView {
     void onCommentsListChanged(List<Comment> list);
 
     void showCommentsLabel(boolean show);
+
+    void setText(String text);
 }

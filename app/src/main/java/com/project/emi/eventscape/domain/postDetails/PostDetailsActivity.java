@@ -48,6 +48,7 @@ import com.project.emi.eventscape.enums.PostStatus;
 import com.project.emi.eventscape.models.Comment;
 import com.project.emi.eventscape.models.Post;
 import com.project.emi.eventscape.util.AnimationUtils;
+import com.project.emi.eventscape.util.CodesUtil;
 import com.project.emi.eventscape.util.FormatterUtil;
 import com.project.emi.eventscape.util.GlideApp;
 import com.project.emi.eventscape.util.ImageUtil;
@@ -82,6 +83,7 @@ public class PostDetailsActivity extends BaseActivity<PostDetailsView, PostDetai
     private RecyclerView commentsRecyclerView;
     private TextView warningCommentsTextView;
 
+    private TextView txtContent;
 
     private MenuItem complainActionMenuItem;
     private MenuItem editActionMenuItem;
@@ -98,6 +100,7 @@ public class PostDetailsActivity extends BaseActivity<PostDetailsView, PostDetai
     private ActionMode mActionMode;
     private boolean isEnterTransitionFinished = false;
     private Button sendButton;
+    private boolean isText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +115,7 @@ public class PostDetailsActivity extends BaseActivity<PostDetailsView, PostDetai
         isAuthorAnimationRequired = getIntent().getBooleanExtra(AUTHOR_ANIMATION_NEEDED_EXTRA_KEY, false);
         postId = getIntent().getStringExtra(POST_ID_EXTRA_KEY);
 
+        isText = (getIntent().getStringExtra(CodesUtil.EVENT_TYPE) == null) ? false : (getIntent().getStringExtra(CodesUtil.EVENT_TYPE).equals("TEXT") ? true : false);
         incrementWatchersCount();
 
         titleTextView = findViewById(R.id.titleTextView);
@@ -133,6 +137,7 @@ public class PostDetailsActivity extends BaseActivity<PostDetailsView, PostDetai
         commentsProgressBar = findViewById(R.id.commentsProgressBar);
         warningCommentsTextView = findViewById(R.id.warningCommentsTextView);
         sendButton = findViewById(R.id.sendButton);
+        txtContent = findViewById(R.id.txtContent);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && isAuthorAnimationRequired) {
             authorImageView.setScaleX(0);
@@ -153,6 +158,16 @@ public class PostDetailsActivity extends BaseActivity<PostDetailsView, PostDetai
                     }
                 }
             });
+        }
+
+        if(isText){
+            txtContent.setVisibility(View.VISIBLE);
+            postImageView.setVisibility(View.GONE);
+            progressBar.setVisibility(View.GONE);
+        } else {
+            txtContent.setVisibility(View.GONE);
+            postImageView.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.VISIBLE);
         }
 
         initRecyclerView();
@@ -454,6 +469,11 @@ public class PostDetailsActivity extends BaseActivity<PostDetailsView, PostDetai
     @Override
     public void showCommentsLabel(boolean show) {
         commentsLabel.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void setText(String text) {
+        this.txtContent.setText(text);
     }
 
     private void openEditCommentDialog(Comment comment) {

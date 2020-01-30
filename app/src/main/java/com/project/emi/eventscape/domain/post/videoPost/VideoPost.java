@@ -135,8 +135,8 @@ public class VideoPost extends AppCompatActivity
     }
 
     private PlayerView playerView;
-    private LinearLayout debugRootView;
-    private Button selectTracksButton;
+  //  private LinearLayout debugRootView;
+   // private Button selectTracksButton;
     private TextView debugTextView;
     private boolean isShowingTrackSelectionDialog;
 
@@ -187,10 +187,10 @@ public class VideoPost extends AppCompatActivity
         }
 
         setContentView(R.layout.activity_video_post);
-        debugRootView = findViewById(R.id.controls_root);
+        //debugRootView = findViewById(R.id.controls_root);
         debugTextView = findViewById(R.id.debug_text_view);
-        selectTracksButton = findViewById(R.id.select_tracks_button);
-        selectTracksButton.setOnClickListener(this);
+        //selectTracksButton = findViewById(R.id.select_tracks_button);
+//        selectTracksButton.setOnClickListener(this);
 
         playerView = findViewById(R.id.player_view);
         playerView.setControllerVisibilityListener(this);
@@ -343,7 +343,7 @@ public class VideoPost extends AppCompatActivity
 
     @Override
     public void onVisibilityChange(int visibility) {
-        debugRootView.setVisibility(visibility);
+        //debugRootView.setVisibility(visibility);
     }
 
     private void initializePlayer() {
@@ -586,7 +586,7 @@ public class VideoPost extends AppCompatActivity
     }
 
     private void showControls() {
-        debugRootView.setVisibility(View.VISIBLE);
+        //debugRootView.setVisibility(View.VISIBLE);
     }
 
     private void showToast(int messageId) {

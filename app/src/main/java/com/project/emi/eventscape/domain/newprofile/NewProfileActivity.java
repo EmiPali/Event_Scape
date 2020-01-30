@@ -46,8 +46,10 @@ import com.project.emi.eventscape.domain.profile.AccountSettingsActivity;
 import com.project.emi.eventscape.domain.usersList.UsersListActivity;
 import com.project.emi.eventscape.domain.usersList.UsersListType;
 import com.project.emi.eventscape.enums.FollowState;
+import com.project.emi.eventscape.enums.ItemType;
 import com.project.emi.eventscape.models.Post;
 import com.project.emi.eventscape.models.User;
+import com.project.emi.eventscape.util.CodesUtil;
 import com.project.emi.eventscape.util.GlideApp;
 import com.project.emi.eventscape.util.ImageUtil;
 import com.project.emi.eventscape.util.LogUtil;
@@ -248,7 +250,8 @@ public class NewProfileActivity extends BaseActivity<ProfileView, ProfilePresent
         intent.putExtra(PostDetailsActivity.POST_ID_EXTRA_KEY, post.getId());
         intent.putExtra(PostDetailsActivity.AUTHOR_ANIMATION_NEEDED_EXTRA_KEY, true);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        intent.putExtra(CodesUtil.EVENT_TYPE, post.getItemType().equals(ItemType.TEXT)? "TEXT": "VIDEO_IMAGE");
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && v.findViewById(R.id.postImageView)!=null ) {
 
             View imageView = v.findViewById(R.id.postImageView);
 

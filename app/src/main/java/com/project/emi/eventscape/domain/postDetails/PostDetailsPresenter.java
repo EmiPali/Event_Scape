@@ -18,6 +18,7 @@ import com.project.emi.eventscape.core.managers.listeners.OnObjectChangedListene
 import com.project.emi.eventscape.core.managers.listeners.OnPostChangedListener;
 import com.project.emi.eventscape.domain.base.BasePresenter;
 import com.project.emi.eventscape.domain.base.BaseView;
+import com.project.emi.eventscape.enums.ItemType;
 import com.project.emi.eventscape.models.Post;
 import com.project.emi.eventscape.models.User;
 
@@ -87,7 +88,11 @@ class PostDetailsPresenter extends BasePresenter<PostDetailsView> {
         ifViewAttached(view -> {
             view.setTitle(post.getTitle());
             view.setDescription(post.getDescription());
+            if(!post.getItemType().equals(ItemType.TEXT))
             view.loadPostDetailImage(post.getImageTitle());
+            else{
+                view.setText(post.getTextContent());
+            }
 
             loadAuthorProfile();
         });

@@ -1,18 +1,3 @@
-/*
- * Copyright 2018 Rozdoum
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
- */
 
 package com.project.emi.eventscape.domain.post;
 
@@ -26,6 +11,8 @@ import com.project.emi.eventscape.R;
 import com.project.emi.eventscape.core.managers.PostManager;
 import com.project.emi.eventscape.core.managers.listeners.OnPostCreatedListener;
 import com.project.emi.eventscape.domain.pickImageBase.PickImagePresenter;
+import com.project.emi.eventscape.enums.EventType;
+import com.project.emi.eventscape.enums.ItemType;
 import com.project.emi.eventscape.util.LogUtil;
 import com.project.emi.eventscape.util.ValidationUtil;
 
@@ -43,11 +30,11 @@ public abstract class BaseCreatePostPresenter<V extends BaseCreatePostView> exte
     @StringRes
     protected abstract int getSaveFailMessage();
 
-    protected abstract void savePost(final String title, final String description);
+    protected abstract void savePost(final String title, final String description, EventType eventType, ItemType itemType, String content);
 
     protected abstract boolean isImageRequired();
 
-    protected void attemptCreatePost(Uri imageUri) {
+    protected void attemptCreatePost(Uri imageUri,EventType eventType, ItemType itemType, String content) {
         // Reset errors.
         ifViewAttached(view -> {
             view.setTitleError(null);
@@ -80,15 +67,15 @@ public abstract class BaseCreatePostPresenter<V extends BaseCreatePostView> exte
             if (!cancel) {
                 creatingPost = true;
                 view.hideKeyboard();
-                savePost(title, description);
+                savePost(title, description, eventType, itemType, content);
             }
         });
     }
 
-    public void doSavePost(Uri imageUri) {
+    public void doSavePost(Uri imageUri, EventType eventType,ItemType itemType, String content) {
         if (!creatingPost) {
             if (hasInternetConnection()) {
-                attemptCreatePost(imageUri);
+                attemptCreatePost(imageUri, eventType ,itemType, content);
             } else {
                 ifViewAttached(view -> view.showSnackBar(R.string.internet_connection_failed));
             }

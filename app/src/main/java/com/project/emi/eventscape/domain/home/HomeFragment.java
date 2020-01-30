@@ -29,6 +29,7 @@ import com.project.emi.eventscape.domain.base.BaseFragment;
 import com.project.emi.eventscape.domain.newprofile.NewProfileActivity;
 import com.project.emi.eventscape.domain.post.createPost.CreatePostActivity;
 import com.project.emi.eventscape.domain.postDetails.PostDetailsActivity;
+import com.project.emi.eventscape.enums.ItemType;
 import com.project.emi.eventscape.models.Post;
 import com.project.emi.eventscape.share.ShareActivity;
 import com.project.emi.eventscape.util.AnimationUtils;
@@ -120,8 +121,9 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
     public void openPostDetailsActivity(Post post, View v) {
         Intent intent = new Intent(getContext(), PostDetailsActivity.class);
         intent.putExtra(PostDetailsActivity.POST_ID_EXTRA_KEY, post.getId());
+        intent.putExtra(CodesUtil.EVENT_TYPE, post.getItemType().equals(ItemType.TEXT)? "TEXT": "VIDEO_IMAGE");
 
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && v.findViewById(R.id.postImageView)!=null ) {
 
             View imageView = v.findViewById(R.id.postImageView);
             View authorImageView = v.findViewById(R.id.authorImageView);

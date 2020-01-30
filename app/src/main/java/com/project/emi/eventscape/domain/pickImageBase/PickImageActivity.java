@@ -53,6 +53,7 @@ import com.greentoad.turtlebody.mediapicker.core.MediaPickerConfig;
 import com.project.emi.eventscape.R;
 import com.project.emi.eventscape.core.Constants;
 import com.project.emi.eventscape.domain.base.BaseActivity;
+import com.project.emi.eventscape.enums.EventType;
 import com.project.emi.eventscape.util.GlideApp;
 import com.project.emi.eventscape.util.ImageUtil;
 import com.project.emi.eventscape.util.LogUtil;
@@ -77,7 +78,7 @@ public abstract class PickImageActivity<V extends PickImageView, P extends PickI
 
     protected abstract ImageView getImageView();
 
-    protected abstract void onImagePikedAction();
+    protected abstract void onImagePikedAction(EventType eventType);
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -102,7 +103,6 @@ public abstract class PickImageActivity<V extends PickImageView, P extends PickI
         if (CropImage.isExplicitCameraPermissionRequired(this)) {
             requestPermissions(new String[]{Manifest.permission.CAMERA}, CropImage.CAMERA_CAPTURE_PERMISSIONS_REQUEST_CODE);
         } else {
-            //CropImage.startPickImageActivity(this);
             showAlert();
         }
     }
@@ -164,7 +164,7 @@ public abstract class PickImageActivity<V extends PickImageView, P extends PickI
                             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, CropImage.PICK_IMAGE_PERMISSIONS_REQUEST_CODE);
                         } else {
                             // no permissions required or already grunted
-                            onImagePikedAction();
+                            onImagePikedAction(filetype == MediaPicker.MediaTypes.VIDEO? EventType.VIDEO: EventType.PHOTO);
                         }
                     }
 
@@ -216,7 +216,7 @@ public abstract class PickImageActivity<V extends PickImageView, P extends PickI
                 requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, CropImage.PICK_IMAGE_PERMISSIONS_REQUEST_CODE);
             } else {
                 // no permissions required or already grunted
-                onImagePikedAction();
+                onImagePikedAction(EventType.PHOTO);
             }
         }
     }
@@ -235,7 +235,7 @@ public abstract class PickImageActivity<V extends PickImageView, P extends PickI
         if (requestCode == CropImage.PICK_IMAGE_PERMISSIONS_REQUEST_CODE) {
             if (imageUri != null && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 LogUtil.logDebug(TAG, "PICK_IMAGE_PERMISSIONS granted");
-                onImagePikedAction();
+                onImagePikedAction(EventType.PHOTO);
             } else {
                 showSnackBar(R.string.permissions_not_granted);
                 LogUtil.logDebug(TAG, "PICK_IMAGE_PERMISSIONS not granted");

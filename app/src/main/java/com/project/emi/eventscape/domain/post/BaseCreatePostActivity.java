@@ -28,6 +28,8 @@ import android.widget.ProgressBar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.project.emi.eventscape.R;
 import com.project.emi.eventscape.domain.pickImageBase.PickImageActivity;
+import com.project.emi.eventscape.enums.EventType;
+import com.project.emi.eventscape.enums.ItemType;
 import com.project.emi.eventscape.util.CodesUtil;
 
 
@@ -42,6 +44,9 @@ public abstract class BaseCreatePostActivity<V extends BaseCreatePostView, P ext
     protected TextInputLayout textInputLayout;
     protected Button postButton;
     private boolean isText = false;
+
+    private ItemType type;
+    private EventType eventType;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -63,7 +68,10 @@ public abstract class BaseCreatePostActivity<V extends BaseCreatePostView, P ext
 
         if (getIntent().getStringExtra(CodesUtil.EVENT_TYPE) != null && getIntent().getStringExtra(CodesUtil.EVENT_TYPE).equals("TEXT")) {
             isText = true;
+            type = ItemType.TEXT;
+            eventType = EventType.TEXT;
         } else {
+            type = ItemType.ITEM;
             isText = false;
         }
 
@@ -89,7 +97,7 @@ public abstract class BaseCreatePostActivity<V extends BaseCreatePostView, P ext
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.doSavePost(null);
+                presenter.doSavePost(null,eventType,type, textHolder!=null?textHolder.getText().toString(): null);
             }
         });
     }
@@ -105,7 +113,8 @@ public abstract class BaseCreatePostActivity<V extends BaseCreatePostView, P ext
     }
 
     @Override
-    protected void onImagePikedAction() {
+    protected void onImagePikedAction(EventType eventType) {
+        this.eventType = eventType;
         loadImageToImageView(imageUri);
     }
 

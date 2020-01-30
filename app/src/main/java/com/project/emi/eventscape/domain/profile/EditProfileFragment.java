@@ -1,5 +1,10 @@
 package com.project.emi.eventscape.domain.profile;
 
+import android.Manifest;
+import android.content.pm.ActivityInfo;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,8 +17,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -27,17 +37,30 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.greentoad.turtlebody.mediapicker.MediaPicker;
+import com.greentoad.turtlebody.mediapicker.core.MediaPickerConfig;
 import com.project.emi.eventscape.R;
 import com.project.emi.eventscape.core.dialogs.ConfirmPasswordDialog;
 import com.project.emi.eventscape.core.managers.DatabaseHelper;
+import com.project.emi.eventscape.domain.pickImageBase.PickImageActivity;
+import com.project.emi.eventscape.enums.EventType;
 import com.project.emi.eventscape.models.User;
 import com.project.emi.eventscape.models.UserAccountSettings;
 import com.project.emi.eventscape.models.UserSettings;
 import com.project.emi.eventscape.util.FirebaseMethods;
+import com.project.emi.eventscape.util.GlideApp;
+import com.project.emi.eventscape.util.ImageUtil;
+import com.project.emi.eventscape.util.LogUtil;
 import com.project.emi.eventscape.util.PreferencesUtil;
 import com.project.emi.eventscape.util.UniversalImageLoader;
+import com.theartofdev.edmodo.cropper.CropImage;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 public class EditProfileFragment extends Fragment implements
         ConfirmPasswordDialog.OnConfirmPasswordListener{
@@ -175,6 +198,13 @@ public class EditProfileFragment extends Fragment implements
             public void onClick(View v) {
                 Log.d(TAG, "onClick: attempting to save changes.");
                 saveProfileSettings();
+            }
+        });
+
+        mChangeProfilePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startMediaPicker(MediaPicker.MediaTypes.IMAGE, false);
             }
         });
 
@@ -356,6 +386,64 @@ public class EditProfileFragment extends Fragment implements
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
+    }
+
+
+    public void startMediaPicker(int filetype, boolean multi){
+        MediaPickerConfig pickerConfig = new MediaPickerConfig()
+                .setAllowMultiSelection(false)
+                .setUriPermanentAccess(true)
+                .setShowConfirmationDialog(true)
+                .setAllowMultiSelection(multi).setShowConfirmationDialog(true)
+                .setScreenOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        MediaPicker.with(Objects.requireNonNull(getActivity()),filetype)
+                .setConfig(pickerConfig)
+                .onResult()
+                .subscribe(new Observer<ArrayList<Uri>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) { }
+
+                    @RequiresApi(api = Build.VERSION_CODES.M)
+                    @Override
+                    public void onNext(ArrayList<Uri> uris) {
+
+
+                        // For API >= 23 we need to check specifically that we have permissions to read external storage.
+                        if (CropImage.isReadExternalStoragePermissionsRequired(getContext(), uris.get(0))) {
+                            // request permissions and handle the result in onRequestPermissionsResult()
+                            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, CropImage.PICK_IMAGE_PERMISSIONS_REQUEST_CODE);
+                        } else {
+                            // no permissions required or already grunted
+                            loadImageToImageView(uris.get(0));
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) { }
+
+                    @Override
+                    public void onComplete() { }
+                });
+    }
+
+    private void loadImageToImageView(Uri imageUri) {
+        if (imageUri == null) {
+            return;
+        }
+
+        ImageUtil.loadLocalImage(GlideApp.with(this), imageUri, mProfilePhoto, new RequestListener<Drawable>() {
+            @Override
+            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                return false;
+            }
+
+            @Override
+            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                LogUtil.logDebug(TAG, "Glide Success Loading image from uri : " + imageUri.getPath());
+                return false;
+            }
+        });
     }
 
 

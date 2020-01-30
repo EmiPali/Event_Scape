@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 
 import com.project.emi.eventscape.R;
 import com.project.emi.eventscape.domain.post.BaseCreatePostActivity;
+import com.project.emi.eventscape.enums.EventType;
+import com.project.emi.eventscape.enums.ItemType;
 
 
 public class CreatePostActivity extends BaseCreatePostActivity<CreatePostView, CreatePostPresenter> implements CreatePostView {
@@ -35,7 +37,7 @@ public class CreatePostActivity extends BaseCreatePostActivity<CreatePostView, C
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.post:
-                presenter.doSavePost(imageUri);
+                presenter.doSavePost(imageUri, EventType.PHOTO, ItemType.ITEM, null);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

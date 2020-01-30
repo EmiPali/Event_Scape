@@ -359,81 +359,88 @@ public class PostInteractor {
         }
 
         final String imageTitle = ImageUtil.generatePostImageTitle(post.getId());
-        UploadTask uploadTask = databaseHelper.uploadImage(imageUri, imageTitle);
+        if(imageUri!=null){
+            UploadTask uploadTask = databaseHelper.uploadImage(imageUri, imageTitle);
 
-        if (uploadTask != null) {
-            uploadTask.addOnFailureListener(exception -> {
-                // Handle unsuccessful uploads
-                onPostCreatedListener.onPostSaved(false);
+            if (uploadTask != null) {
+                uploadTask.addOnFailureListener(exception -> {
+                    // Handle unsuccessful uploads
+                    onPostCreatedListener.onPostSaved(false);
 
-            }).addOnSuccessListener(taskSnapshot -> {
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                }).addOnSuccessListener(taskSnapshot -> {
+                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
 
-                post.setImageTitle(imageTitle);
-                createOrUpdatePost(post);
+                    post.setImageTitle(imageTitle);
+                    createOrUpdatePost(post);
 
-                onPostCreatedListener.onPostSaved(true);
-            });
+                    onPostCreatedListener.onPostSaved(true);
+                });
+            }
+        } else {
+            createOrUpdatePost(post);
+
+            onPostCreatedListener.onPostSaved(true);
         }
+
     }
 
     public void createOrUpdateLike(final String postId, final String postAuthorId) {
-//        try {
-//            String authorId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-//            DatabaseReference mLikesReference = databaseHelper
-//                    .getDatabaseReference()
-//                    .child(DatabaseHelper.POST_LIKES_DB_KEY)
-//                    .child(postId)
-//                    .child(authorId);
-//            mLikesReference.push();
-//            String id = mLikesReference.push().getKey();
-//            Like like = new Like(authorId);
-//            like.setId(id);
-//
-//            mLikesReference.child(id).setValue(like, new DatabaseReference.CompletionListener() {
-//                @Override
-//                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-//                    if (databaseError == null) {
-//                        DatabaseReference postRef = databaseHelper
-//                                .getDatabaseReference()
-//                                .child(DatabaseHelper.POSTS_DB_KEY + "/" + postId + "/likesCount");
-//
-//                        incrementLikesCount(postRef);
-//                        DatabaseReference profileRef = databaseHelper
-//                                .getDatabaseReference()
-//                                .child(DatabaseHelper.PROFILES_DB_KEY + "/" + postAuthorId + "/likesCount");
-//
-//                        incrementLikesCount(profileRef);
-//                    } else {
-//                        LogUtil.logError(TAG, databaseError.getMessage(), databaseError.toException());
-//                    }
-//                }
-//
-//                private void incrementLikesCount(DatabaseReference postRef) {
-//                    postRef.runTransaction(new Transaction.Handler() {
-//                        @Override
-//                        public Transaction.Result doTransaction(MutableData mutableData) {
-//                            Integer currentValue = mutableData.getValue(Integer.class);
-//                            if (currentValue == null) {
-//                                mutableData.setValue(1);
-//                            } else {
-//                                mutableData.setValue(currentValue + 1);
-//                            }
-//
-//                            return Transaction.success(mutableData);
-//                        }
-//
-//                        @Override
-//                        public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
-//                            LogUtil.logInfo(TAG, "Updating likes count transaction is completed.");
-//                        }
-//                    });
-//                }
-//
-//            });
-//        } catch (Exception e) {
-//            LogUtil.logError(TAG, "createOrUpdateLike()", e);
-//        }
+        try {
+            String authorId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            DatabaseReference mLikesReference = databaseHelper
+                    .getDatabaseReference()
+                    .child(DatabaseHelper.POST_LIKES_DB_KEY)
+                    .child(postId)
+                    .child(authorId);
+            mLikesReference.push();
+            String id = mLikesReference.push().getKey();
+            Like like = new Like(authorId);
+            like.setId(id);
+
+            mLikesReference.child(id).setValue(like, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                    if (databaseError == null) {
+                        DatabaseReference postRef = databaseHelper
+                                .getDatabaseReference()
+                                .child(DatabaseHelper.POSTS_DB_KEY + "/" + postId + "/likesCount");
+
+                        incrementLikesCount(postRef);
+                        DatabaseReference profileRef = databaseHelper
+                                .getDatabaseReference()
+                                .child(DatabaseHelper.PROFILES_DB_KEY + "/" + postAuthorId + "/likesCount");
+
+                        incrementLikesCount(profileRef);
+                    } else {
+                        LogUtil.logError(TAG, databaseError.getMessage(), databaseError.toException());
+                    }
+                }
+
+                private void incrementLikesCount(DatabaseReference postRef) {
+                    postRef.runTransaction(new Transaction.Handler() {
+                        @Override
+                        public Transaction.Result doTransaction(MutableData mutableData) {
+                            Integer currentValue = mutableData.getValue(Integer.class);
+                            if (currentValue == null) {
+                                mutableData.setValue(1);
+                            } else {
+                                mutableData.setValue(currentValue + 1);
+                            }
+
+                            return Transaction.success(mutableData);
+                        }
+
+                        @Override
+                        public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
+                            LogUtil.logInfo(TAG, "Updating likes count transaction is completed.");
+                        }
+                    });
+                }
+
+            });
+        } catch (Exception e) {
+            LogUtil.logError(TAG, "createOrUpdateLike()", e);
+        }
 
     }
 
